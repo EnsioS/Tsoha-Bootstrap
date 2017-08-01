@@ -7,7 +7,7 @@
 
         <title>
             {% block title %}
-            Tietokantasovellus
+            Tietokantasovellus(kissaemoji)
             {% endblock %}
         </title>
 
@@ -24,7 +24,7 @@
 
     <body>
 
-        <nav class="navbar navbar-default" role="navigation">
+        <nav class="navbar navbar-inverse" role="navigation">
             <div class="container-fluid">
 
                 <div class="navbar-header">
@@ -35,7 +35,8 @@
                         <span class="icon-bar"></span>
                     </button>
                     <!-- Sovelluksen nimi -->
-                    <a class="navbar-brand" href="{{base_path}}"><i class="em em-scream_cat"></i> Huutokauppa</a>
+                    <a class="navbar-brand" href="{{base_path}}"><i class="em em-scream_cat"></i></a>
+                    <a class="navbar-brand" href="{{base_path}}">Huutokauppa</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="navigation">
@@ -43,12 +44,26 @@
                         <!-- Navigaation linkit -->
                         <li><a href="{{base_path}}">Etusivu</a></li>
                     </ul>
+                    
+            <div class="navbar-form navbar-left hidden-xs search-form">
+<!--              <form method="get" action="/fi/haku/">-->
+                <div class="input-group">
+                  <input type="text" name="term" class="search form-control blink" placeholder="Syötä hakusana">
+
+                  <span class="input-group-btn">
+                    <button title="Hae" class="btn btn-primary search-btn" type="submit">Hae</button>
+                  </span>
+                </div>
+              <!--</form>-->
+            </div>
                     <ul class="nav navbar-nav navbar-right">  
-                        <li><a href="#" class="btn btn-primary btn-lg">Kirjaudu sisään</a></li>
+                        <li><a href="#" class="btn tausta">Kirjaudu sisään</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
+        
+       <!--btn btn-danger navbar-btn--> 
 
         <div id="main-container">
             <!-- Dynaaminen sisältö tulee tähän -->

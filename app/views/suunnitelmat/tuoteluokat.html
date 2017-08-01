@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Tuoteluokat</h1>
+<p>
+    <a href="#" class="btn btn-default">Lisää tuoteluokka</a>
+</p>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Nimi</th>
+            <th>Tuotteita myynnissä</th>
+            <th>Tuotteita yhteensä</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td><a href="#">Kaikki</a></td>
+            <td>4</td>
+            <td>4</td>
+            <th><a class="btn btn-default btn-sm" href="#">Muokkaa</a></th>
+        </tr>
+        <tr>
+            <td><a href="http://ensu.users.cs.helsinki.fi/kissaemoji-huutokauppa/tuoteluokka">Asunnot</a></td>
+            <td>4</td>
+            <td>4</td>
+            <th><a class="btn btn-default btn-sm" href="#">Muokkaa</a></th>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

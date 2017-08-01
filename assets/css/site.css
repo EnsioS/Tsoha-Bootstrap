@@ -1,10 +1,48 @@
 #main-container{
-  max-width: 1200px;
-  padding: 10px 25px;
-  margin: 0px auto;
+    max-width: 1200px;
+    padding: 10px 25px;
+    margin: 0px auto;
 }
 
 .navbar .container-fluid{
-  max-width: 1200px;
-  margin: 0px auto;
+    max-width: 1200px;
+    margin: 0px auto;
 }
+
+.navbar-brand i{
+    font-size: 250%;
+    margin-top: -10px;
+} 
+
+.caption li {
+    display: inline;
+}
+
+.offer {
+    float: right;
+    font-size: large;
+}
+
+.important {
+    font-size: larger;
+    font-weight: bolder;
+    border-style: solid;
+    padding: 0.4em;
+    border-radius: 5px;
+}
+
+.important1 {
+    color: white;
+    background-color: red;
+    padding: 0.4em;
+    border-radius: 5px;
+}
+
+/*.lower{
+    font-size: 150%;
+    margin-top: 10px;
+}*/
+
+/*.tausta a:hover{
+   color:#ac2925;
+}    */
