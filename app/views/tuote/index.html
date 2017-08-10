@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Tuoteluokan     
+    <b>{{tuoteluokka.nimi}}</b>
+    {% if tuoteluokka.nimi|length < 1 %}
+    <b>Kaikki</b>
+    {% endif %}
+    tuotteet </h1>
+
+<p>
+    <a href="#" class="btn btn-toolbar">Lisää tuote</a>
+</p>
+
+{% for tuote in tuotteet %}
+<div class="col-md-4">
+    <div class="thumbnail">
+        <a href="{{base_path}}/tuote/{{tuote.tuote_id}}">
+            <div>
+                <img src ="{{tuote.linkki_kuvaan}}" style="width:100%">                  
+            </div>
+            <div class="caption">
+                <ul>
+                    <li>{{tuote.nimi}}</li>
+                    <li class="offer"><b>{{tuote.minimihinta}} &euro;</b></li>
+                </ul>
+            </div> 
+        </a>
+    </div>
+</div>
+{% endfor %}
+
+
+
+{% endblock %}

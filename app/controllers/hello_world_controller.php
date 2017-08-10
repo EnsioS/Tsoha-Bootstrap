@@ -1,6 +1,7 @@
 <?php
 
-require 'app/models/tuote.php';
+// Composer hoitaa luokkien automaattisen lataamisen
+//require 'app/models/tuote.php'; 
 class HelloWorldController extends BaseController {
 
     public static function index() {
@@ -24,10 +25,11 @@ class HelloWorldController extends BaseController {
         // Testaa koodiasi täällä
         $mokki = Tuote::findOne(1);
         $tuotteet = Tuote::findAll();
+        $Asunnot = Tuote::findByTuoteluokka(1);
         
         Kint::dump($tuotteet);
         Kint::dump($mokki);
-        
+        Kint::dump($Asunnot);
         
     }
 }

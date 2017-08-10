@@ -11,7 +11,7 @@ INSERT INTO Tuote (nimi, kuvaus, minimihinta, linkki_kuvaan)
 VALUES ('Moderni asunto', 'Nimi kertoo kaiken.', '100', 'https://upload.wikimedia.org/wikipedia/commons/a/af/All_Gizah_Pyramids.jpg');
 
 INSERT INTO Tuote (nimi, kuvaus, kauppa_alkaa, kauppa_loppuu, minimihinta, linkki_kuvaan)
-VALUES ('Psykoankka', 'Osta, jos uskallat.', '2017-07-17 17:05:47', '2017-10-10 17:00:00', 100, 'https://pixabay.com/p-1629601/?no_redirect' );
+VALUES ('Machu Picchu', 'Osta, jos uskallat.', '2017-07-17 17:05:47', '2017-10-10 17:00:00', 100, 'http://orig07.deviantart.net/bd39/f/2010/074/e/7/pichu_animacion_by_dark_clefita.gif' );
 
 
 -- Lisätään tuotteet luokkiin

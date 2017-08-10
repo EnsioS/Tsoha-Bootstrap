@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{tuote.nimi}}</h1>
+<div class="col-sm-9">
+    <div class="thumbnail">
+        <img src ="{{tuote.linkki_kuvaan}}" 
+             style="width:100%">
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="important">
+    <p class="important1">
+        Aikaa jäljellä <br>
+        1 päivä 3 h 24 min 
+    </p>
+    <p class="">
+        Korkein tarjous <br>
+        30 &euro;
+    </p>
+    </div>
+</div>
+
+<!--Tuotteen kuvaus-->
+<div>
+    <p>{{tuote.kuvaus}}</p>
+    <p>
+        <button class="btn btn-danger">Poista</button> <a href="#" class="btn btn-default">Muokkaa</a>
+    </p>
+</div>
+
+
+{% endblock %}
