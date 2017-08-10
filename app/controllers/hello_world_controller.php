@@ -1,5 +1,6 @@
 <?php
 
+require 'app/models/tuote.php';
 class HelloWorldController extends BaseController {
 
     public static function index() {
@@ -21,6 +22,12 @@ class HelloWorldController extends BaseController {
     
     public static function sandbox() {
         // Testaa koodiasi täällä
-        echo 'Hello World!';
+        $mokki = Tuote::findOne(1);
+        $tuotteet = Tuote::findAll();
+        
+        Kint::dump($tuotteet);
+        Kint::dump($mokki);
+        
+        
     }
 }
