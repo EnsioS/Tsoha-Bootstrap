@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1> Lisää tuote </h1>
+
+<form method="post" action="{{base_path}}/tuoteluokka/{{id}}/lisaa/tuote">
+    <div class="form-group">
+        <label>Nimi</label>
+        <input class="form-control" name="nimi" type="text">
+    </div>
+    <div class="form-group">
+        <label>Kuvaus</label>
+        <input class="form-control" name="kuvaus" type="text">
+    </div>
+    <div class="form-group">
+        <label>Kauppa alkaa</label>
+        <input class="form-control" name="alkaa" type="time">
+    </div>    
+    <div class="form-group">
+        <label>Kauppa päättyy</label>
+        <input class="form-control" name="loppuu" type="time">
+    </div>  
+    <div class="form-group">
+        <label>Minimihinta</label>
+        <input class="form-control" name="minimihinta" type="number">
+    </div>    
+    <div class="form-group">
+        <label>Linkki kuvaan</label>
+        <input class="form-control" name="linkki" type="text">
+    </div>    
+    
+    <button type="submit" class="btn btn-primary"> Lisää tuote </button>
+</form>
+
+{% endblock %}

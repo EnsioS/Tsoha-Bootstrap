@@ -30,6 +30,7 @@ $routes->get('/tuote/:id', function($id){
 TuoteController::show($id);
 });
 
+// Tuoteluokan lisäys
 $routes->post('/tuoteluokat', function() {
     TuoteluokkaController::store();
 });
@@ -39,9 +40,18 @@ $routes->get('/tuoteluokat', function() {
     TuoteluokkaController::index();
 });
 
-
-
-// Tuoteluokan sivu, listaus tuoteluokkaan kuuluvista tuotteista
+// Tuoteluokan sivu, listaus tuoteluokkaan kuuluvista tuotteista 
 $routes->get('/tuoteluokka/:id', function($id){
     TuoteluokkaController::show($id);
 });
+
+// Tuotteen lisääminen tuoteluokkaan
+//   Tuotteen lisääminen tuoteluokkaan
+$routes->post('/tuoteluokka/:id/lisaa/tuote', function($id){
+    TuoteController::store($id);
+});      
+//   Lisäyssivun näyttäminen
+$routes->get('/tuoteluokka/:id/lisaa/tuote', function($id){
+    TuoteController::form($id);
+});
+

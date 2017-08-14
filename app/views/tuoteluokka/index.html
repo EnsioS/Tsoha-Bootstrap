@@ -8,6 +8,12 @@
     <button type="submit" class="btn btn-primary">Lisää tuoteluokka</button>
 </form>
 
+{% if message|length > 1 %}
+<div class="alert alert-success">
+  {{message}}
+</div>
+{% endif %}
+
 <br>
 
 <table class="table table-striped table-bordered">

@@ -76,5 +76,22 @@ class Tuote extends BaseModel {
         
         return $tuotteet;
     }
+    
+    public function save($id) {
+        //$tuoteluokka_id = $id;
+        
+        $query = DB::connection()->prepare('INSERT INTO Tuote (nimi, kuvaus, kauppa_alkaa, kauppa_loppuu,'
+                . ' minimihinta, linkki_kuvaan) VALUES (:nimi, :kuvaus, :alkaa,'
+                . ' :loppuu, :minimihinta, :linkki) RETURNING tuote_id');
+        $query->execute(array('nimi' => $this->nimi, 'kuvaus' => $this->kuvaus, 
+            'alkaa' => $this->kauppa_alkaa, 'loppuu' => $this->kauppa_loppuu,
+             'minimihinta' => $this->minimihinta, 'linkki' => $this->linkki_kuvaan));
+        $row = $query->fetch();
+        $this->tuote_id = $row['tuote_id'];
+        
+        $query2 = DB::connection()->prepare('INSERT INTO Luokan_tuote (tuote, tuoteluokka)'
+                . ' VALUES (:tuote, :tuoteluokka)');
+        $query2->execute(array('tuote' => $this->tuote_id, 'tuoteluokka' => $id));
+    }
 
 }
