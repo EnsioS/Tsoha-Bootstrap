@@ -2,14 +2,17 @@
 
 class Tuoteluokka extends BaseModel {
 
-    public $tuoteluokka_id, $nimi;
+    public $tuoteluokka_id, $nimi, $tuotteita;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validate_nimi');
     }
 
     public static function findAll() {
-        $query = DB::connection()->prepare('SELECT * FROM Tuoteluokka');
+        $query = DB::connection()->prepare('SELECT tl.tuoteluokka_id, tl.nimi, COUNT(lt.tuote) AS määrä FROM Tuoteluokka AS tl'
+                . ' LEFT JOIN Luokan_tuote AS lt ON lt.tuoteluokka = tl.tuoteluokka_id'
+                . ' GROUP BY tl.tuoteluokka_id');
         $query->execute();
         $rows = $query->fetchAll();
 
@@ -18,7 +21,8 @@ class Tuoteluokka extends BaseModel {
         foreach ($rows as $row) {
             $tuoteluokat[] = new Tuoteluokka(array(
                 'tuoteluokka_id' => $row['tuoteluokka_id'],
-                'nimi' => $row['nimi']
+                'nimi' => $row['nimi'], 
+                'tuotteita' => $row['määrä']   
             ));
         }
 
@@ -46,5 +50,11 @@ class Tuoteluokka extends BaseModel {
         $row = $query->fetch();
         $this->tuoteluokka_id = $row['tuoteluokka_id'];
     }
+    
+    public function validate_nimi() {
+        return parent::validate_string_length('Nimi', $this->nimi, 2);       
+    }
+    
+    
 
 }

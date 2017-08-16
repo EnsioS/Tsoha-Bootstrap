@@ -23,13 +23,16 @@ class HelloWorldController extends BaseController {
     
     public static function sandbox() {
         // Testaa koodiasi täällä
-        $mokki = Tuote::findOne(1);
-        $tuotteet = Tuote::findAll();
-        $Asunnot = Tuote::findByTuoteluokka(1);
+//        $a = new Tuoteluokka(array(
+//           'nimi' => null 
+//        ));
+//        
+//        $errors = $a->errors();
+//        
+//        Kint::dump($errors);
         
-        Kint::dump($tuotteet);
-        Kint::dump($mokki);
-        Kint::dump($Asunnot);
+        $maara = Tuote::count();
         
+        Kint::dump('Tuotteita yhteensä '. $maara);
     }
 }

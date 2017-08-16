@@ -77,6 +77,14 @@ class Tuote extends BaseModel {
         return $tuotteet;
     }
     
+    public static function count() {
+        $query = DB::connection()->prepare('SELECT COUNT(tuote_id) as maara FROM Tuote');
+        $query->execute();
+        $count = $query->fetch();
+              
+        return $count['maara'];
+    }
+    
     public function save($id) {
         //$tuoteluokka_id = $id;
         

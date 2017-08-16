@@ -14,10 +14,10 @@ CREATE TABLE Tuote(
 );
 
 CREATE TABLE Luokan_tuote(
-    id SERIAL PRIMARY KEY,
     tuote INTEGER REFERENCES Tuote(tuote_id) NOT NULL,
     tuoteluokka INTEGER REFERENCES Tuoteluokka(tuoteluokka_id)        
-    NOT NULL    
+    NOT NULL,
+    PRIMARY KEY (tuote, tuoteluokka)
 );
 
 CREATE TABLE Henkilotiedot(
