@@ -55,3 +55,12 @@ $routes->get('/tuoteluokka/:id/lisaa/tuote', function($id){
     TuoteController::form($id);
 });
 
+// Kirjautuminen
+//    Kirjautumislomakkeen esittäminen
+$routes->get('/login', function(){
+    UserController::login();
+});
+
+$routes->post('/login', function(){
+    UserController::handle_login();
+});

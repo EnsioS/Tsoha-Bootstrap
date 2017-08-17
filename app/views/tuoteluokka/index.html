@@ -1,3 +1,4 @@
+{% import "macros/forms.html" as forms %}
 {% extends "base.html" %}
 
 {% block content %}
@@ -14,15 +15,8 @@
 </div>
 {% endif %}
 
-{% if errors %}
-<div class="alert alert-danger">
-    {% for error in errors %}
-    <ul>       
-        <li>{{error}}</li>
-    </ul>
-    {% endfor %}
-</div>
-{% endif %}
+<!--virheilmoitukset tulee tähän (jos niitä on)-->
+{{forms.error_messages(errors)}}
 <br>
 
 <table class="table table-striped table-bordered">

@@ -39,5 +39,5 @@ CREATE TABLE Asiakastili(
     henkilotiedot INTEGER REFERENCES Henkilotiedot(henkilo_id) NOT NULL,
     kayttajatunnus varchar(20) NOT NULL,
     salasana varchar(100) NOT NULL,
-    Meklari boolean DEFAULT FALSE
+    meklari boolean DEFAULT FALSE
 );

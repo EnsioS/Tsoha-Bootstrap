@@ -113,7 +113,7 @@ class Tuote extends BaseModel {
         $errors = array();
         
         if (!is_int($this->minimihinta)) {
-            $errors[] = 'Minimi hinnan tulee olla kokonaisluku';
+            $errors[] = 'Minimihinnan tulee olla kokonaisluku';
             
             if ($this->minimihinta < 1) {
                 $errors[] = 'Minimihinta ei saa olla nolla tai negatiivinen';

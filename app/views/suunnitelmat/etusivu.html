@@ -1,15 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="page-header">
+<div class="page-header">
+    {% if message %}
+    <h1>{{message}} <i class="em em-scream_cat"></i></h1>
+    {% else %}
     <h1>Tervetuloa <i class="em em-scream_cat"></i> Huutokauppaan</h1>
-  </div>
+    {% endif %}
+</div>
 
-  <p>  
+<p>  
     <a href="http://ensu.users.cs.helsinki.fi/kissaemoji-huutokauppa/tuoteluokka" class="btn btn-primary btn-lg">Asunnot</a>
-  </p>
-  
-  <div>
-      <a href="http://ensu.users.cs.helsinki.fi/kissaemoji-huutokauppa/tuote">Tuotteen sivu</a>
-  </div>
+</p>
+
+<div>
+    <a href="http://ensu.users.cs.helsinki.fi/kissaemoji-huutokauppa/tuote">Tuotteen sivu</a>
+</div>
 {% endblock %}
