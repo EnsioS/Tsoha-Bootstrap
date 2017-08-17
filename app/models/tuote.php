@@ -7,6 +7,7 @@ class Tuote extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators =array('validate_nimi', 'validate_kuvaus', 'validate_minimihinta');
     }
 
     public static function findAll() {
@@ -85,9 +86,7 @@ class Tuote extends BaseModel {
         return $count['maara'];
     }
     
-    public function save($id) {
-        //$tuoteluokka_id = $id;
-        
+    public function save($id) {        
         $query = DB::connection()->prepare('INSERT INTO Tuote (nimi, kuvaus, kauppa_alkaa, kauppa_loppuu,'
                 . ' minimihinta, linkki_kuvaan) VALUES (:nimi, :kuvaus, :alkaa,'
                 . ' :loppuu, :minimihinta, :linkki) RETURNING tuote_id');
@@ -100,6 +99,28 @@ class Tuote extends BaseModel {
         $query2 = DB::connection()->prepare('INSERT INTO Luokan_tuote (tuote, tuoteluokka)'
                 . ' VALUES (:tuote, :tuoteluokka)');
         $query2->execute(array('tuote' => $this->tuote_id, 'tuoteluokka' => $id));
+    }
+    
+    public function validate_nimi() {
+        return parent::validate_string_length('Nimi', $this->nimi, 2, 100);
+    }
+    
+    public function validate_kuvaus() {
+        return parent::validate_string_length('Kuvaus', $this->kuvaus, 4, 100000);
+    }
+    
+    public function validate_minimihinta() {
+        $errors = array();
+        
+        if (!is_int($this->minimihinta)) {
+            $errors[] = 'Minimi hinnan tulee olla kokonaisluku';
+            
+            if ($this->minimihinta < 1) {
+                $errors[] = 'Minimihinta ei saa olla nolla tai negatiivinen';
+            }
+        }
+        
+        return $errors;
     }
 
 }

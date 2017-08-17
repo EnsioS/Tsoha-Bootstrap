@@ -21,23 +21,27 @@ class BaseModel {
         $errors = array();
 
         foreach ($this->validators as $validator) {
-            // Kutsu validointimetodia tässä ja lisää sen palauttamat virheet errors-taulukkoon
-            $validator_errors = $this->{$validator}();
+            // Kutsu validointimetodia tässä ja lisää sen palauttamat virheet errors-taulukkoon            
+            $validator_errors = $this->{$validator}();            
             $errors = array_merge($errors, $validator_errors);
         }
 
         return $errors;
     }
 
-    public function validate_string_length($valitaded, $string, $length) {
+    public function validate_string_length($valitaded, $string, $minlength, $maxlength) {
         $errors = array();
         
         if ($string == '' || $string == null) {
             $errors[] = $valitaded.' ei saa olla tyhjä!';
         }
         
-        if (strlen($string) < $length) {
-            $errors[] = $valitaded. ' ei saa olla '. $length. ' merkkiä lyhyempi!';
+        if (strlen($string) < $minlength) {
+            $errors[] = $valitaded. ' ei saa olla '. $minlength. ' merkkiä lyhyempi!';
+        }
+        
+        if (strlen($string) > $maxlength) {
+            $errors[] = $valitaded. ' ei saa olla '. $maxlength. ' merkkiä pidempi';
         }
         
         return $errors;

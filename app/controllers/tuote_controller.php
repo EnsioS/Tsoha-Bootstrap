@@ -20,20 +20,31 @@ class TuoteController extends BaseController {
     
     public static function store($id){
         $params = $_POST;
-        
-        $tuote = new Tuote(array(
+        $attributes = array(
             'nimi' => $params['nimi'],
             'kuvaus' => $params['kuvaus'],
             'kauppa_alkaa' => $params['alkaa'],
             'kauppa_loppuu' => $params['loppuu'],
             'minimihinta' => $params['minimihinta'],
             'linkki_kuvaan' => $params['linkki']
-        ));
+        );
         
-        $tuote->save($id);
+        $tuote = new Tuote($attributes);
+                
+        $errors = $tuote->errors();
         
-        // Ohjataan käyttäjä lisäyksen jälkeen pelin esittelysivulle
-        Redirect::to('/tuoteluokka/'. $id);
+        if (count($errors) == 0) {
+            $tuote->save($id);
+            
+            Redirect::to('/tuoteluokka/'. $id);
+        } else {
+            View::make('tuote/add.html', array('id' => $id, 'errors' => $errors, 'attributes' => $attributes));
+        }
+        
+        
+        
+        
+        
     }
 
 }

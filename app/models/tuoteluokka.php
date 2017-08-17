@@ -52,7 +52,7 @@ class Tuoteluokka extends BaseModel {
     }
     
     public function validate_nimi() {
-        return parent::validate_string_length('Nimi', $this->nimi, 2);       
+        return parent::validate_string_length('Nimi', $this->nimi, 2, 50);       
     }
     
     

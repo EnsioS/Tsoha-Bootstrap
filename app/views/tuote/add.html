@@ -4,6 +4,16 @@
 
 <h1> Lisää tuote </h1>
 
+{% if errors %}
+<div class="alert alert-danger ">
+    {% for error in errors %}
+    <ul>
+        <li>{{error}}</li>
+    </ul>
+    {% endfor %}
+</div>
+{% endif %}
+
 <form method="post" action="{{base_path}}/tuoteluokka/{{id}}/lisaa/tuote">
     <div class="form-group">
         <label>Nimi</label>
