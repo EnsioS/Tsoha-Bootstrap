@@ -18,7 +18,7 @@ class User extends BaseModel {
                 'id' => $row['asiakastili_id'], 
                 'username' => $row['kayttajatunnus'],
                 'password' => $row['salasana'],
-                'meklari' => $row['Meklari']
+                'meklari' => $row['meklari']
             ));
             
             return $user;
@@ -35,6 +35,7 @@ class User extends BaseModel {
         
         if($row) {
             return new User(array(
+                'id' => $row['asiakastili_id'],
                 'username' => $row['kayttajatunnus'],
                 'password' => $row['salasana'],
                 'meklari' => $row['meklari']

@@ -8,9 +8,11 @@
     {% endif %}
     tuotteet </h1>
 
+{% if user_logged_in.meklari %}
 <p>
     <a href="{{base_path}}/tuoteluokka/{{tuoteluokka.tuoteluokka_id}}/lisaa/tuote" class="btn btn-toolbar">Lisää tuote</a>
 </p>
+{% endif %}
 
 {% for tuote in tuotteet %}
 <div class="col-md-4">

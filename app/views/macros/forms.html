@@ -12,3 +12,35 @@
 {% endif %}
 
 {% endmacro %}
+
+
+{% macro tuote_form(action, button_text, attributes) %}
+<form method="post" action="{{action}}">
+    <div class="form-group">
+        <label>Nimi</label>
+        <input class="form-control" name="nimi" type="text" value="{{attributes.nimi}}">
+    </div>
+    <div class="form-group">
+        <label>Kuvaus</label>
+        <input class="form-control" name="kuvaus" type="text" value="{{attributes.kuvaus}}">
+    </div>
+    <div class="form-group">
+        <label>Kauppa alkaa</label>
+        <input class="form-control" name="alkaa" type="text" value="{{attributes.kauppa_alkaa}}">
+    </div>    
+    <div class="form-group">
+        <label>Kauppa päättyy</label>
+        <input class="form-control" name="loppuu" type="time" >
+    </div>  
+    <div class="form-group">
+        <label>Minimihinta</label>
+        <input class="form-control" name="minimihinta" type="text" value="{{attributes.minimihinta}}">
+    </div>    
+    <div class="form-group">
+        <label>Linkki kuvaan</label>
+        <input class="form-control" name="linkki" type="text" value="{{attributes.linkki_kuvaan}}">
+    </div>    
+    
+    <button type="submit" class="btn btn-primary">{{button_text}}</button>
+</form>
+{% endmacro %}

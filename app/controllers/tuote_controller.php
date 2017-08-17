@@ -40,10 +40,36 @@ class TuoteController extends BaseController {
         } else {
             View::make('tuote/add.html', array('id' => $id, 'errors' => $errors, 'attributes' => $attributes));
         }
+    }
+    
+    public static function edit($id) {
+        $tuote = Tuote::findOne($id);
+        View::make('tuote/edit.html', array('attributes' => $tuote));
+    }
+    
+    public static function update($id) {
+        $params = $_POST;
         
+        $attributes = array(
+            'tuote_id' => $id,
+            'nimi' => $params['nimi'],
+            'kuvaus' => $params['kuvaus'],
+            'kauppa_alkaa' => $params['alkaa'],
+            'kauppa_loppuu' => $params['loppuu'],
+            'minimihinta' => $params['minimihinta'],
+            'linkki_kuvaan' => $params['linkki_kuvaan']
+        );
         
+        $tuote = new Tuote($attributes);
+        $errors = $tuote->errors();
         
-        
+        if (count($errors) > 0) {
+            View::make('tuote/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+        } else {
+            $tuote->update();
+            
+            Redirect::to('tuote/' . $tuote->tuote_id, array('message' => 'Tuotteen tietoja muokattu onnistuneesti!'));
+        }
         
     }
 

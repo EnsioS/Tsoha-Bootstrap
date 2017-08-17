@@ -4,10 +4,12 @@
 {% block content %}
 <h1>Tuoteluokat</h1>
 
+{% if user_logged_in.meklari %}
 <form method="post" action="{{base_path}}/tuoteluokat">
     <input type="text" name="nimi" style="width:50%" placeholder="Tuoteluokan nimi" value="{{attributes.nimi}}">
     <button type="submit" class="btn btn-primary" >Lisää tuoteluokka</button>
 </form>
+{% endif %}
 
 {% if message|length > 1 %}
 <div class="alert alert-success">
@@ -33,14 +35,18 @@
             <td><a href="{{base_path}}/tuotteet">Kaikki</a></td>
             <td>4</td>
             <td>{{tuotteita}}</td>
+            {% if user_logged_in.meklari %}
             <th><a class="btn btn-default btn-sm" href="#">Muokkaa</a></th>
+            {% endif %}
         </tr>
         {% for tuoteluokka in tuoteluokat %}
         <tr>
             <td><a href="{{base_path}}/tuoteluokka/{{tuoteluokka.tuoteluokka_id}}">{{tuoteluokka.nimi}}</a></td>
             <td>4</td>
             <td>{{tuoteluokka.tuotteita}}</td>
+            {% if user_logged_in.meklari %}
             <th><a class="btn btn-default btn-sm" href="#">Muokkaa</a></th>
+            {% endif %}
         </tr>
         {% endfor %}
     </tbody>

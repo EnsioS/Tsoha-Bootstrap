@@ -1,0 +1,10 @@
+{% import "macros/forms.html" as forms %}
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1> Muokkaa tuotetta </h1>
+
+{{forms.tuote_form("#{base_path}/tuote/#{attributes.tuote_id}", "Muokkaa tuotetta", attributes)}}
+
+{% endblock %}

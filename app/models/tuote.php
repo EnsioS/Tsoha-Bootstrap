@@ -101,6 +101,16 @@ class Tuote extends BaseModel {
         $query2->execute(array('tuote' => $this->tuote_id, 'tuoteluokka' => $id));
     }
     
+    public function update() {
+         $query = DB::connection()->prepare('UPDATE Tuote SET nimi = :nimi, kuvaus = :kuvaus, '
+                . 'kauppa_alkaa = :alkaa, kauppa_loppuu = :loppuu, minimihinta = :minimihinta, '
+                .  'linkki_kuvaan = :linkki WHERE tuote_id = :id');
+        $query->execute(array('nimi' => $this->nimi, 'kuvaus' => $this->kuvaus, 
+            'alkaa' => $this->kauppa_alkaa, 'loppuu' => $this->kauppa_loppuu,
+             'minimihinta' => $this->minimihinta, 'linkki' => $this->linkki_kuvaan, 'id' => $this->tuote_id));
+        $query->fetch();       
+    }
+    
     public function validate_nimi() {
         return parent::validate_string_length('Nimi', $this->nimi, 2, 100);
     }

@@ -30,6 +30,15 @@ $routes->get('/tuote/:id', function($id){
 TuoteController::show($id);
 });
 
+// Tuotteen muokkauslomakkeen esittäminen
+$routes->get('/tuote/:id/edit', function($id) {
+    TuoteController::edit($id);
+});
+// Tuotteen muokkaaminen
+$routes->post('/tuote/:id/edit', function($id) {
+    TuoteController::update($id);
+});
+
 // Tuoteluokan lisäys
 $routes->post('/tuoteluokat', function() {
     TuoteluokkaController::store();

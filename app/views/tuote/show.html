@@ -2,6 +2,13 @@
 
 {% block content %}
 <h1>{{tuote.nimi}}</h1>
+
+{% if message|length > 1 %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
+
 <div class="col-sm-9">
     <div class="thumbnail">
         <img src ="{{tuote.linkki_kuvaan}}" 
@@ -25,9 +32,12 @@
 <!--Tuotteen kuvaus-->
 <div>
     <p>{{tuote.kuvaus}}</p>
+    {% if user_logged_in.meklari %}
     <p>
-        <button class="btn btn-danger">Poista</button> <a href="#" class="btn btn-default">Muokkaa</a>
+        <button class="btn btn-danger">Poista</button> 
+        <a href="{{base_path}}/tuote/{{tuote.tuote_id}}/edit" class="btn btn-default">Muokkaa</a>
     </p>
+    {% endif %}    
 </div>
 
 
