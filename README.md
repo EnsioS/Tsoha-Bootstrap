@@ -13,3 +13,15 @@ Yleisiä linkkejä:
 [Huutokauppa (linkki valmiiseen aiheeseen)](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Huutokauppa.html) 
 
 (Mukaelma linkitetyllä sivulla esitetystä valmiista aiheesta)
+
+## Kirjautumiseen
+
+**Asiakas**  
+
+Käyttäjätunnus: NAINEN  
+Salasana: Salasana3  
+
+**Meklari** (vain tälle näkyy tietokannan muutokseen tähtäävät toiminnot)
+
+Käyttäjätunnus: MIES  
+Salasana: Salasana2  
