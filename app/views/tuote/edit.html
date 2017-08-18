@@ -5,6 +5,9 @@
 
 <h1> Muokkaa tuotetta </h1>
 
-{{forms.tuote_form("#{base_path}/tuote/#{attributes.tuote_id}", "Muokkaa tuotetta", attributes)}}
+<!--virheilmoitukset tulee tähän (jos niitä on)-->
+{{forms.error_messages(errors)}}
+
+{{forms.tuote_form("#{base_path}/tuote/#{attributes.tuote_id}/edit", "Muokkaa tuotetta", attributes)}}
 
 {% endblock %}

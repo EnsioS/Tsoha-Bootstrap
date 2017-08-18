@@ -122,7 +122,7 @@ class Tuote extends BaseModel {
     public function validate_minimihinta() {
         $errors = array();
         
-        if (!is_int($this->minimihinta)) {
+        if (!is_numeric($this->minimihinta)) {
             $errors[] = 'Minimihinnan tulee olla kokonaisluku';
             
             if ($this->minimihinta < 1) {

@@ -57,7 +57,7 @@ class TuoteController extends BaseController {
             'kauppa_alkaa' => $params['alkaa'],
             'kauppa_loppuu' => $params['loppuu'],
             'minimihinta' => $params['minimihinta'],
-            'linkki_kuvaan' => $params['linkki_kuvaan']
+            'linkki_kuvaan' => $params['linkki']
         );
         
         $tuote = new Tuote($attributes);
@@ -68,7 +68,7 @@ class TuoteController extends BaseController {
         } else {
             $tuote->update();
             
-            Redirect::to('tuote/' . $tuote->tuote_id, array('message' => 'Tuotteen tietoja muokattu onnistuneesti!'));
+            Redirect::to('/tuote/' . $tuote->tuote_id, array('message' => 'Tuotteen tietoja muokattu onnistuneesti!'));
         }
         
     }
