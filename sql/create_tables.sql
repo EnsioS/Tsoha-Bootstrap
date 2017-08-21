@@ -1,6 +1,6 @@
 CREATE TABLE Tuoteluokka(
     tuoteluokka_id SERIAL PRIMARY KEY,
-    nimi varchar(50)
+    nimi varchar(50) UNIQUE
 );
 
 CREATE TABLE Tuote(
@@ -14,7 +14,7 @@ CREATE TABLE Tuote(
 );
 
 CREATE TABLE Luokan_tuote(
-    tuote INTEGER REFERENCES Tuote(tuote_id) NOT NULL,
+    tuote INTEGER NOT NULL REFERENCES Tuote(tuote_id) ON DELETE CASCADE,
     tuoteluokka INTEGER REFERENCES Tuoteluokka(tuoteluokka_id)        
     NOT NULL,
     PRIMARY KEY (tuote, tuoteluokka)
@@ -29,7 +29,7 @@ CREATE TABLE Henkilotiedot(
 
 CREATE TABLE Tarjous(
     tarjous_id SERIAL PRIMARY KEY,
-    tuote INTEGER REFERENCES Tuote(tuote_id) NOT NULL,
+    tuote INTEGER NOT NULL REFERENCES Tuote(tuote_id) ON DELETE CASCADE,
     henkilotiedot INTEGER REFERENCES Henkilotiedot(henkilo_id) NOT NULL,
     summa INTEGER NOT NULL
 );

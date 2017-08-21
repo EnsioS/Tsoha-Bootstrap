@@ -111,6 +111,12 @@ class Tuote extends BaseModel {
         $query->fetch();       
     }
     
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Tuote WHERE tuote_id = :id');
+        $query->execute(array('id' => $this->tuote_id));
+        $query->fetch();
+    }
+    
     public function validate_nimi() {
         return parent::validate_string_length('Nimi', $this->nimi, 2, 100);
     }

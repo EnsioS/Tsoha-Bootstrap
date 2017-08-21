@@ -64,6 +64,10 @@ $routes->get('/tuoteluokka/:id/lisaa/tuote', function($id){
     TuoteController::form($id);
 });
 
+$routes->post('/tuote/:id/destroy', function($id){
+    TuoteController::destroy($id);  
+});
+
 // Kirjautuminen
 //    Kirjautumislomakkeen esittäminen
 $routes->get('/login', function(){

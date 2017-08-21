@@ -18,14 +18,14 @@
 
 <div class="col-md-3">
     <div class="important">
-    <p class="important1">
-        Aikaa jäljellä <br>
-        1 päivä 3 h 24 min 
-    </p>
-    <p class="">
-        Korkein tarjous <br>
-        30 &euro;
-    </p>
+        <p class="important1">
+            Aikaa jäljellä <br>
+            1 päivä 3 h 24 min 
+        </p>
+        <p class="">
+            Korkein tarjous <br>
+            30 &euro;
+        </p>
     </div>
 </div>
 
@@ -33,10 +33,12 @@
 <div>
     <p>{{tuote.kuvaus}}</p>
     {% if user_logged_in.meklari %}
-    <p>
-        <button class="btn btn-danger">Poista</button> 
-        <a href="{{base_path}}/tuote/{{tuote.tuote_id}}/edit" class="btn btn-default">Muokkaa</a>
-    </p>
+
+    <form method="post" action="{{base_path}}/tuote/{{tuote.tuote_id}}/destroy">
+        <button type="submit" class="btn btn-danger">Poista</button> 
+    </form>
+    <a href="{{base_path}}/tuote/{{tuote.tuote_id}}/edit" class="btn btn-default">Muokkaa</a>
+
     {% endif %}    
 </div>
 

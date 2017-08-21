@@ -2,14 +2,20 @@
 -- Lisätään tuoteluokat 
 INSERT INTO Tuoteluokka (nimi) VALUES ('Asunnot');
 INSERT INTO Tuoteluokka (nimi) VALUES ('Pokemonit');
+INSERT INTO Tuoteluokka (nimi) VALUES ('POISTETTAVA');
 
 
 -- Lisätään tuotteita
 INSERT INTO Tuote (nimi, kuvaus, kauppa_alkaa, kauppa_loppuu, minimihinta, linkki_kuvaan) 
 VALUES ('Kesämökki', 'Hyvien kulkuyhteyksien varrella.','2004-10-19 10:23:54+02', '2004-10-30 10:23:54+02', 30, 'https://upload.wikimedia.org/wikipedia/commons/e/e4/White_House_02.jpg');
 INSERT INTO Tuote (nimi, kuvaus, minimihinta, linkki_kuvaan)
-VALUES ('Moderni asunto', 'Nimi kertoo kaiken.', '100', 'https://upload.wikimedia.org/wikipedia/commons/a/af/All_Gizah_Pyramids.jpg');
-
+VALUES ('Moderni asunto 1', 'Nimi kertoo kaiken.', '100', 'https://upload.wikimedia.org/wikipedia/commons/a/af/All_Gizah_Pyramids.jpg');
+INSERT INTO Tuote (nimi, kuvaus, minimihinta, linkki_kuvaan)
+VALUES ('Moderni asunto 2', 'Nimi kertoo kaiken.', '100', 'https://upload.wikimedia.org/wikipedia/commons/a/af/All_Gizah_Pyramids.jpg');
+INSERT INTO Tuote (nimi, kuvaus, minimihinta, linkki_kuvaan)
+VALUES ('Moderni asunto 3', 'Nimi kertoo kaiken.', '100', 'https://upload.wikimedia.org/wikipedia/commons/a/af/All_Gizah_Pyramids.jpg');
+INSERT INTO Tuote (nimi, kuvaus, minimihinta, linkki_kuvaan)
+VALUES ('Pokemon center', '"Haluutko parantaa sun pokemonit?"', '10000', 'https://c1.staticflickr.com/5/4070/4549247371_3aecce8246_z.jpg');
 INSERT INTO Tuote (nimi, kuvaus, kauppa_alkaa, kauppa_loppuu, minimihinta, linkki_kuvaan)
 VALUES ('Machu Picchu', 'Osta, jos uskallat.', '2017-07-17 17:05:47', '2017-10-10 17:00:00', 100, 'http://orig07.deviantart.net/bd39/f/2010/074/e/7/pichu_animacion_by_dark_clefita.gif' );
 
@@ -17,7 +23,11 @@ VALUES ('Machu Picchu', 'Osta, jos uskallat.', '2017-07-17 17:05:47', '2017-10-1
 -- Lisätään tuotteet luokkiin
 INSERT INTO Luokan_tuote (tuote, tuoteluokka) VALUES (1,1);
 INSERT INTO Luokan_tuote (tuote, tuoteluokka) VALUES (2,1);
-INSERT INTO Luokan_tuote (tuote, tuoteluokka) VALUES (3,2);
+INSERT INTO Luokan_tuote (tuote, tuoteluokka) VALUES (3,1);
+INSERT INTO Luokan_tuote (tuote, tuoteluokka) VALUES (4,1);
+INSERT INTO Luokan_tuote (tuote, tuoteluokka) VALUES (5,1);
+INSERT INTO Luokan_tuote (tuote, tuoteluokka) VALUES (5,2);
+INSERT INTO Luokan_tuote (tuote, tuoteluokka) VALUES (6,2);
 
 -- Lisätään henkilötiedot
 INSERT INTO Henkilotiedot (nimi, sahkoposti, osoite)

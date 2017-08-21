@@ -72,5 +72,12 @@ class TuoteController extends BaseController {
         }
         
     }
+    
+    public static function destroy($id) {
+        $tuote = new Tuote(array('tuote_id' => $id));
+        $tuote->destroy();
+        
+        Redirect::to('/');        
+    }
 
 }
