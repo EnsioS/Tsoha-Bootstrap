@@ -13,6 +13,16 @@
 
 {% endmacro %}
 
+{% macro message(message, class) %}
+
+{% if message|length > 1 %}
+<div class="alert {{class}}">
+    {{message}}
+</div>
+{% endif %}
+
+{% endmacro %}
+
 
 {% macro tuote_form(action, button_text, attributes) %}
 <form method="post" action="{{action}}">

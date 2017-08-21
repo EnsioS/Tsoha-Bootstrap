@@ -14,11 +14,13 @@ class TuoteController extends BaseController {
         View::make('tuote/show.html', array('tuote' => $tuote));
     }
     
-    public static function form($id) {                
+    public static function form($id) {
+        self::check_logged_in_as_meklari();
         View::make('tuote/add.html', array('id' => $id));
     }
     
     public static function store($id){
+        self::check_logged_in_as_meklari();
         $params = $_POST;
         $attributes = array(
             'nimi' => $params['nimi'],
@@ -43,11 +45,13 @@ class TuoteController extends BaseController {
     }
     
     public static function edit($id) {
+        self::check_logged_in_as_meklari();
         $tuote = Tuote::findOne($id);
         View::make('tuote/edit.html', array('attributes' => $tuote));
     }
     
     public static function update($id) {
+        self::check_logged_in_as_meklari();
         $params = $_POST;
         
         $attributes = array(
@@ -74,6 +78,7 @@ class TuoteController extends BaseController {
     }
     
     public static function destroy($id) {
+        self::check_logged_in_as_meklari();
         $tuote = new Tuote(array('tuote_id' => $id));
         $tuote->destroy();
         

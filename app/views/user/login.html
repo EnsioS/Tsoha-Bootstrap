@@ -7,6 +7,12 @@
 <!--virheilmoitukset tulee tähän (jos niitä on)-->
 {{forms.error_messages(errors)}}
 
+<!--kirjautumisen vaatiminen (jos on)-->
+{{forms.message(demand_message, 'alert-danger')}}
+
+<!--viesti onnistuneesta uloskirjautumisesta-->
+{{forms.message(message, 'alert-success')}}
+
 <form method="post" action="{{base_path}}/login">
     <div class="form-group">
         <label>Käyttäjätunnus</label>

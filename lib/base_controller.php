@@ -14,9 +14,10 @@
       return null;
     }
 
-    public static function check_logged_in(){
-      // Toteuta kirjautumisen tarkistus tähän.
-      // Jos käyttäjä ei ole kirjautunut sisään, ohjaa hänet toiselle sivulle (esim. kirjautumissivulle).
+    public static function check_logged_in_as_meklari(){
+        if(!isset($_SESSION['user']) || !self::get_user_logged_in()->meklari){
+            Redirect::to('/login', array('demand_message' => 'Kirjaudu sisään meklarina'));
+        }
     }
 
   }

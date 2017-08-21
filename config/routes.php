@@ -73,7 +73,11 @@ $routes->post('/tuote/:id/destroy', function($id){
 $routes->get('/login', function(){
     UserController::login();
 });
-
+//    Sisään kirjautuminen
 $routes->post('/login', function(){
     UserController::handle_login();
+});
+//    Ulos kirjautuminen
+$routes->post('/logout', function(){
+    UserController::logout();
 });
