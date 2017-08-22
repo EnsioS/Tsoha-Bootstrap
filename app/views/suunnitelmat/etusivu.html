@@ -9,11 +9,38 @@
     {% endif %}
 </div>
 
-<p>  
-    <a href="http://ensu.users.cs.helsinki.fi/kissaemoji-huutokauppa/tuoteluokka" class="btn btn-primary btn-lg">Asunnot</a>
-</p>
+<div class="col-md-3">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <a href="{{base_path}}/tuoteluokat">Tuoteluokat</a>
+        </div>
+        <div class="panel-body">
+            {% for tuoteluokka in tuoteluokat %}
+            <a href="{{base_path}}/tuoteluokka/{{tuoteluokka.tuoteluokka_id}}">{{tuoteluokka.nimi}}</a>
+            <br>
+            {% endfor %}
+        </div>
+    </div>    
+</div>
 
-<!--<div>
-    <a href="http://ensu.users.cs.helsinki.fi/kissaemoji-huutokauppa/tuote">Tuotteen sivu</a>
-</div>-->
+<div class="col-md-9" >
+    {% for tuote in tuotteet %}
+    <div class="col-md-3" >
+        <div class="thumbnail">
+            <a href="{{base_path}}/tuote/{{tuote.tuote_id}}">
+                <div>
+                    <img src ="{{tuote.linkki_kuvaan}}" style="width:100%">                  
+                </div>
+                <div class="caption">
+                    <ul>
+                        <li>{{tuote.nimi}}</li>
+                        <li class="offer"><b>{{tuote.minimihinta}} &euro;</b></li>
+                    </ul>
+                </div> 
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
 {% endblock %}

@@ -3,7 +3,7 @@
 class Tuote extends BaseModel {
 
     // Attribuutit
-    public $tuote_id, $nimi, $kuvaus, $kauppa_alkaa, $kauppa_loppuu, $minimihinta, $linkki_kuvaan;
+    public $tuote_id, $nimi, $kuvaus, $kauppa_alkaa, $kauppa_loppuu, $minimihinta, $max_tarjous, $linkki_kuvaan;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -11,7 +11,8 @@ class Tuote extends BaseModel {
     }
 
     public static function findAll() {
-        $query = DB::connection()->prepare('SELECT * FROM Tuote');
+        $query = DB::connection()->prepare('SELECT tu.nimi, tu.tuote_id, tu.minimihinta, MAX(ta.summa) as max, tu.linkki_kuvaan FROM Tuote AS tu '
+                . 'LEFT JOIN Tarjous AS ta ON ta.tuote = tu.tuote_id GROUP BY tu.tuote_id');
         $query->execute();
         $rows = $query->fetchAll();
 
@@ -21,10 +22,11 @@ class Tuote extends BaseModel {
             $tuotteet[] = new Tuote(array(
                 'tuote_id' => $row['tuote_id'],
                 'nimi' => $row['nimi'],
-                'kuvaus' => $row['kuvaus'],
-                'kauppa_alkaa' => $row['kauppa_alkaa'],
-                'kauppa_loppuu' => $row['kauppa_loppuu'],
+//                'kuvaus' => $row['kuvaus'],
+//                'kauppa_alkaa' => $row['kauppa_alkaa'],
+//                'kauppa_loppuu' => $row['kauppa_loppuu'],
                 'minimihinta' => $row['minimihinta'],
+                'max_tarjous' => $row['max'],
                 'linkki_kuvaan' => $row['linkki_kuvaan']
             ));
         }
@@ -107,14 +109,12 @@ class Tuote extends BaseModel {
                 .  'linkki_kuvaan = :linkki WHERE tuote_id = :id');
         $query->execute(array('nimi' => $this->nimi, 'kuvaus' => $this->kuvaus, 
             'alkaa' => $this->kauppa_alkaa, 'loppuu' => $this->kauppa_loppuu,
-             'minimihinta' => $this->minimihinta, 'linkki' => $this->linkki_kuvaan, 'id' => $this->tuote_id));
-        $query->fetch();       
+             'minimihinta' => $this->minimihinta, 'linkki' => $this->linkki_kuvaan, 'id' => $this->tuote_id));      
     }
     
     public function destroy() {
         $query = DB::connection()->prepare('DELETE FROM Tuote WHERE tuote_id = :id');
         $query->execute(array('id' => $this->tuote_id));
-        $query->fetch();
     }
     
     public function validate_nimi() {

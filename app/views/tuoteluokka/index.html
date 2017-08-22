@@ -11,11 +11,7 @@
 </form>
 {% endif %}
 
-{% if message|length > 1 %}
-<div class="alert alert-success">
-    {{message}}
-</div>
-{% endif %}
+{{forms.message(message, 'alert-success')}}
 
 <!--virheilmoitukset tulee tähän (jos niitä on)-->
 {{forms.error_messages(errors)}}

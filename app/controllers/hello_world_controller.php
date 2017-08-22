@@ -6,7 +6,10 @@ class HelloWorldController extends BaseController {
 
     public static function index() {
         // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
-        View::make('suunnitelmat/etusivu.html');
+        $tuoteluokat = Tuoteluokka::findAll();
+        $tuotteet = Tuote::findAll();
+        
+        View::make('suunnitelmat/etusivu.html', array('tuoteluokat' => $tuoteluokat, 'tuotteet' => $tuotteet));
     }
 
     public static function tuoteluokat() {

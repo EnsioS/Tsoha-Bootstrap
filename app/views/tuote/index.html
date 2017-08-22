@@ -1,3 +1,4 @@
+{% import "macros/forms.html" as forms %}
 {% extends "base.html" %}
 
 {% block content %}
@@ -7,6 +8,8 @@
     <b>Kaikki</b>
     {% endif %}
     tuotteet </h1>
+
+{{forms.message(message, 'alert-success')}}
 
 {% if user_logged_in.meklari %}
 <p>
@@ -24,7 +27,11 @@
             <div class="caption">
                 <ul>
                     <li>{{tuote.nimi}}</li>
+                    {% if tuote.max_tarjous %}
+                    <li class="offer"><b>{{tuote.max_tarjous}} &euro;</b></li>
+                    {% else %}
                     <li class="offer"><b>{{tuote.minimihinta}} &euro;</b></li>
+                    {% endif %}
                 </ul>
             </div> 
         </a>

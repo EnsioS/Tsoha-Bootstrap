@@ -82,7 +82,7 @@ class TuoteController extends BaseController {
         $tuote = new Tuote(array('tuote_id' => $id));
         $tuote->destroy();
         
-        Redirect::to('/');        
+        Redirect::to('/tuotteet', array('message' => 'Tuote on poistettu onnistuneesti'));        
     }
 
 }

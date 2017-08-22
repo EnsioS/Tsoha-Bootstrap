@@ -32,15 +32,17 @@
 <!--Tuotteen kuvaus-->
 <div>
     <p>{{tuote.kuvaus}}</p>
-    {% if user_logged_in.meklari %}
-
-    <form method="post" action="{{base_path}}/tuote/{{tuote.tuote_id}}/destroy">
-        <button type="submit" class="btn btn-danger">Poista</button> 
-    </form>
-    <a href="{{base_path}}/tuote/{{tuote.tuote_id}}/edit" class="btn btn-default">Muokkaa</a>
-
-    {% endif %}    
+    
 </div>
+
+{% if user_logged_in.meklari %}
+<form method="post" action="{{base_path}}/tuote/{{tuote.tuote_id}}/destroy">
+    <button type="submit" class="btn btn-danger">Poista</button> 
+    <a href="{{base_path}}/tuote/{{tuote.tuote_id}}/edit" class="btn btn-default">Muokkaa</a>
+</form>
+
+{% endif %}    
+
 
 
 {% endblock %}

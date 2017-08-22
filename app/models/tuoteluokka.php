@@ -12,7 +12,7 @@ class Tuoteluokka extends BaseModel {
     public static function findAll() {
         $query = DB::connection()->prepare('SELECT tl.tuoteluokka_id, tl.nimi, COUNT(lt.tuote) AS määrä FROM Tuoteluokka AS tl'
                 . ' LEFT JOIN Luokan_tuote AS lt ON lt.tuoteluokka = tl.tuoteluokka_id'
-                . ' GROUP BY tl.tuoteluokka_id');
+                . ' GROUP BY tl.tuoteluokka_id ORDER BY tl.nimi');
         $query->execute();
         $rows = $query->fetchAll();
 
