@@ -1,4 +1,5 @@
 {% import "macros/forms.html" as forms %}
+{% import "macros/lists.html" as lists %}
 {% extends "base.html" %}
 
 {% block content %}
@@ -17,28 +18,6 @@
 </p>
 {% endif %}
 
-{% for tuote in tuotteet %}
-<div class="col-md-4">
-    <div class="thumbnail">
-        <a href="{{base_path}}/tuote/{{tuote.tuote_id}}">
-            <div>
-                <img src ="{{tuote.linkki_kuvaan}}" style="width:100%">                  
-            </div>
-            <div class="caption">
-                <ul>
-                    <li>{{tuote.nimi}}</li>
-                    {% if tuote.max_tarjous %}
-                    <li class="offer"><b>{{tuote.max_tarjous}} &euro;</b></li>
-                    {% else %}
-                    <li class="offer"><b>{{tuote.minimihinta}} &euro;</b></li>
-                    {% endif %}
-                </ul>
-            </div> 
-        </a>
-    </div>
-</div>
-{% endfor %}
-
-
+{{lists.tuote_list(tuotteet, "http://ensu.users.cs.helsinki.fi/kissaemoji-huutokauppa/")}}
 
 {% endblock %}

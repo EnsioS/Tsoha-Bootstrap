@@ -11,8 +11,8 @@ class Tuote extends BaseModel {
     }
 
     public static function findAll() {
-        $query = DB::connection()->prepare('SELECT tu.nimi, tu.tuote_id, tu.minimihinta, MAX(ta.summa) as max, tu.linkki_kuvaan FROM Tuote AS tu '
-                . 'LEFT JOIN Tarjous AS ta ON ta.tuote = tu.tuote_id GROUP BY tu.tuote_id');
+        $query = DB::connection()->prepare('SELECT tu.nimi, tu.tuote_id, tu.minimihinta, MAX(ta.summa) AS max, tu.linkki_kuvaan FROM Tuote AS tu '
+                . 'LEFT JOIN Tarjous AS ta ON ta.tuote = tu.tuote_id GROUP BY tu.tuote_id ORDER BY tu.tuote_id DESC');
         $query->execute();
         $rows = $query->fetchAll();
 
@@ -35,8 +35,11 @@ class Tuote extends BaseModel {
     }
 
     public static function findOne($id) {
-        $query = DB::connection()->prepare('SELECT * FROM Tuote WHERE tuote_id = :id LIMIT 1');
-        $query->execute(array('id' => $id));
+        $query = DB::connection()->prepare('SELECT tuote_id, nimi, kuvaus, kauppa_alkaa, '
+                . 'kauppa_loppuu, minimihinta, linkki_kuvaan, MAX(summa) AS max '
+                . 'FROM Tuote LEFT JOIN Tarjous ON tuote = tuote_id WHERE tuote_id = :id '
+                . 'GROUP BY tuote_id');
+        $query->execute(array('id' => $id)); 
         $row = $query->fetch();
 
         if ($row) {
@@ -47,6 +50,7 @@ class Tuote extends BaseModel {
                 'kauppa_alkaa' => $row['kauppa_alkaa'],
                 'kauppa_loppuu' => $row['kauppa_loppuu'],
                 'minimihinta' => $row['minimihinta'],
+                'max_tarjous' => $row['max'],
                 'linkki_kuvaan' => $row['linkki_kuvaan']
             ));
 
@@ -57,9 +61,9 @@ class Tuote extends BaseModel {
     }
 
     public static function findByTuoteluokka($id) {
-        $query = DB::connection()->prepare('SELECT * FROM Tuote AS t LEFT JOIN Luokan_tuote as lt'
-                . ' ON t.tuote_id = lt.tuote'
-                . ' WHERE lt.tuoteluokka = :id');
+        $query = DB::connection()->prepare('SELECT * FROM Tuote LEFT JOIN Luokan_tuote'
+                . ' ON tuote_id = tuote'
+                . ' WHERE tuoteluokka = :id');
         $query->execute(array('id' => $id));
         $rows = $query->fetchAll();
 

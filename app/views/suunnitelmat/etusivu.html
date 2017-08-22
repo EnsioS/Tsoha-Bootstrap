@@ -1,3 +1,4 @@
+{% import "macros/lists.html" as lists %}
 {% extends "base.html" %}
 
 {% block content %}
@@ -24,23 +25,7 @@
 </div>
 
 <div class="col-md-9" >
-    {% for tuote in tuotteet %}
-    <div class="col-md-3" >
-        <div class="thumbnail">
-            <a href="{{base_path}}/tuote/{{tuote.tuote_id}}">
-                <div>
-                    <img src ="{{tuote.linkki_kuvaan}}" style="width:100%">                  
-                </div>
-                <div class="caption">
-                    <ul>
-                        <li>{{tuote.nimi}}</li>
-                        <li class="offer"><b>{{tuote.minimihinta}} &euro;</b></li>
-                    </ul>
-                </div> 
-            </a>
-        </div>
-    </div>
-    {% endfor %}
+{{lists.tuote_list(tuotteet, "http://ensu.users.cs.helsinki.fi/kissaemoji-huutokauppa/")}}
 </div>
 
 {% endblock %}
