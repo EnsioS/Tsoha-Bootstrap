@@ -19,8 +19,20 @@
 <div class="col-md-3">
     <div class="important">
         <p class="important1">
+            {% if alkaa < date().timestamp and loppuu > date().timestamp %}
             Aikaa jäljellä <br>
-            1 päivä 3 h 24 min 
+            {{((loppuu - date().timestamp)/(24*3600))|round(0,'floor')}} päivää
+            {{(((loppuu- date().timestamp) - ((loppuu - date().timestamp)/(24*3600))|round(0,'floor')*24*3600)/3600)|round(0,'floor')}} h
+            {{(((loppuu - date().timestamp)-((loppuu - date().timestamp)/(24*3600))|round(0,'floor')*24*3600-(((loppuu- date().timestamp) - ((loppuu - date().timestamp)/(24*3600))|round(0,'floor')*24*3600)/3600)|round(0,'floor')*3600)/60)|round(0,'floor')}} min
+            {% elseif alkaa > date().timestamp %} 
+            Kauppa alkaa <br>
+            {{tuote.kauppa_alkaa}}
+            {% elseif loppuu < 1 %}
+            Tuotteen myyntiaikaa ei ole määritelty    
+            {% elseif loppuu < date().timestamp %}
+            Kauppa päättyi <br>
+            {{tuote.kauppa_loppuu}}
+            {% endif %}
         </p>
         <p>
             {% if tuote.max_tarjous %}
@@ -42,11 +54,11 @@
 </div>
 
 <p>
-<!--    alkaa {{alkaa}} <br>
-    loppuu {{loppuu}} <br>-->
-<!--    Kauppa alkaa {{tuote.kauppa_alkaa}} <br>
-    Kauppa päätty {{tuote.kauppa_loppuu}} <br>-->
-<!--    nykyinen aika {{date().timestamp}}-->
+    <!--    alkaa {{alkaa}} <br>
+        loppuu {{loppuu}} <br>-->
+    <!--    Kauppa alkaa {{tuote.kauppa_alkaa}} <br>
+        Kauppa päätty {{tuote.kauppa_loppuu}} <br>-->
+    <!--    nykyinen aika {{date().timestamp}}-->
 </p>
 
 {% if alkaa < date().timestamp and loppuu > date().timestamp %}
