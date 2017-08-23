@@ -11,15 +11,18 @@ class TuoteController extends BaseController {
     public static function show($id) {
         $tuote = Tuote::findOne($id);
 
-        View::make('tuote/show.html', array('tuote' => $tuote));
+        $timestamp_alkaa = self::timestamp_to_int_format($tuote->kauppa_alkaa);
+        $timestamp_loppuu = self::timestamp_to_int_format($tuote->kauppa_loppuu);
+        
+        View::make('tuote/show.html', array('tuote' => $tuote, 'alkaa' => $timestamp_alkaa, 'loppuu' => $timestamp_loppuu));
     }
-    
+
     public static function form($id) {
         self::check_logged_in_as_meklari();
         View::make('tuote/add.html', array('id' => $id));
     }
-    
-    public static function store($id){
+
+    public static function store($id) {
         self::check_logged_in_as_meklari();
         $params = $_POST;
         $attributes = array(
@@ -30,30 +33,30 @@ class TuoteController extends BaseController {
             'minimihinta' => $params['minimihinta'],
             'linkki_kuvaan' => $params['linkki']
         );
-        
+
         $tuote = new Tuote($attributes);
-                
+
         $errors = $tuote->errors();
-        
+
         if (count($errors) == 0) {
             $tuote->save($id);
-            
-            Redirect::to('/tuoteluokka/'. $id);
+
+            Redirect::to('/tuoteluokka/' . $id);
         } else {
             View::make('tuote/add.html', array('id' => $id, 'errors' => $errors, 'attributes' => $attributes));
         }
     }
-    
+
     public static function edit($id) {
         self::check_logged_in_as_meklari();
         $tuote = Tuote::findOne($id);
         View::make('tuote/edit.html', array('attributes' => $tuote));
     }
-    
+
     public static function update($id) {
         self::check_logged_in_as_meklari();
         $params = $_POST;
-        
+
         $attributes = array(
             'tuote_id' => $id,
             'nimi' => $params['nimi'],
@@ -63,26 +66,25 @@ class TuoteController extends BaseController {
             'minimihinta' => $params['minimihinta'],
             'linkki_kuvaan' => $params['linkki']
         );
-        
+
         $tuote = new Tuote($attributes);
         $errors = $tuote->errors();
-        
+
         if (count($errors) > 0) {
             View::make('tuote/edit.html', array('errors' => $errors, 'attributes' => $attributes));
         } else {
             $tuote->update();
-            
+
             Redirect::to('/tuote/' . $tuote->tuote_id, array('message' => 'Tuotteen tietoja muokattu onnistuneesti!'));
         }
-        
     }
-    
+
     public static function destroy($id) {
         self::check_logged_in_as_meklari();
         $tuote = new Tuote(array('tuote_id' => $id));
         $tuote->destroy();
-        
-        Redirect::to('/tuotteet', array('message' => 'Tuote on poistettu onnistuneesti'));        
+
+        Redirect::to('/tuotteet', array('message' => 'Tuote on poistettu onnistuneesti'));
     }
 
 }

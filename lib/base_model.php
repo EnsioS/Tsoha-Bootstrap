@@ -46,5 +46,26 @@ class BaseModel {
         
         return $errors;
     }
+    
+    public function validate_timestamp($valitaded, $timestamp) {
+        $errors = array();
+       
+        if ($timestamp == '' || $timestamp == null) {
+            return $errors;
+        }
+        
+        if (strlen($timestamp) < 10) {
+            $errors[] = 'Ilmoita päivämäärä kohtaan esim. muodossa YYYY-mm-dd HH:ii:ss';
+            return $errors;
+        }
+        
+        try {
+            $time = new DateTime($timestamp);
+        } catch (Exception $ex) {
+            $errors[] = 'Ilmoita päivämäärä kohtaan "'. $valitaded .'" esim. muodossa YYYY-mm-dd HH:ii:ss';
+        }
+        
+        return $errors;
+    }
 
 }

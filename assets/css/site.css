@@ -18,6 +18,10 @@
     display: inline;
 }
 
+.name {
+    margin-left: -40px;
+}
+
 .offer {
     float: right;
     font-size: large;
