@@ -20,15 +20,4 @@ class BaseController {
         }
     }
 
-    public static function timestamp_to_int_format($timestamp) {
-        $timestamp_int = null;
-
-        if (strlen($timestamp) > 0) {
-            $time = new DateTime($timestamp);
-            $timestamp_int = $time->getTimestamp();
-        }
-        
-        return $timestamp_int;
-    }
-
 }

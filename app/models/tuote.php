@@ -4,11 +4,11 @@ class Tuote extends BaseModel {
 
     // Attribuutit
     public $tuote_id, $nimi, $kuvaus, $kauppa_alkaa, $kauppa_loppuu, $minimihinta, $max_tarjous, $linkki_kuvaan;
-
+ 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_nimi', 'validate_kuvaus', 'validate_minimihinta', 
-            'validate_kauppa_alkaa', 'validate_kauppa_loppuu');
+        $this->validators = array('validate_nimi', 'validate_kuvaus', 'validate_minimihinta',
+            'validate_kauppa_alkaa', 'validate_kauppa_loppuu', 'validate_alkaa_before_loppuu');
     }
 
     public static function findAll() {
@@ -137,6 +137,16 @@ class Tuote extends BaseModel {
 
     public function validate_kauppa_loppuu() {
         return parent::validate_timestamp('Kauppa päättyy', $this->kauppa_loppuu);
+    }
+
+    public function validate_alkaa_before_loppuu() {
+        $errors = array();
+        
+        if (self::timestamp_to_int_format($this->kauppa_alkaa) > self::timestamp_to_int_format($this->kauppa_loppuu)) {
+            $errors[] = 'Kaupan tulee alkaa ennen kuin se päättyy';
+        }
+        
+        return $errors;    
     }
 
     public function validate_minimihinta() {

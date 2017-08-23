@@ -11,8 +11,8 @@ class TuoteController extends BaseController {
     public static function show($id) {
         $tuote = Tuote::findOne($id);
 
-        $timestamp_alkaa = self::timestamp_to_int_format($tuote->kauppa_alkaa);
-        $timestamp_loppuu = self::timestamp_to_int_format($tuote->kauppa_loppuu);
+        $timestamp_alkaa = tuote::timestamp_to_int_format($tuote->kauppa_alkaa);
+        $timestamp_loppuu = tuote::timestamp_to_int_format($tuote->kauppa_loppuu);
         
         View::make('tuote/show.html', array('tuote' => $tuote, 'alkaa' => $timestamp_alkaa, 'loppuu' => $timestamp_loppuu));
     }
