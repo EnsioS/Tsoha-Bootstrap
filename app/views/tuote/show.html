@@ -70,8 +70,8 @@
 
 {% if user_logged_in.meklari %}
     <form method="post" action="{{base_path}}/tuote/{{tuote.tuote_id}}/destroy" class="destroy-form col-md-3" data-confirm="Oletko varma, että haluat poistaa tuotteen?">
-        <button type="submit" class="btn btn-danger">Poista</button> 
         <a href="{{base_path}}/tuote/{{tuote.tuote_id}}/edit" class="btn btn-default">Muokkaa</a>
+        <button type="submit" class="btn btn-danger">Poista</button>         
     </form>
 {% endif %}    
 

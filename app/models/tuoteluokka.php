@@ -2,11 +2,11 @@
 
 class Tuoteluokka extends BaseModel {
 
-    public $tuoteluokka_id, $nimi, $tuotteita;
+    public $tuoteluokka_id, $nimi, $tuotteita, $myynnissa;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_nimi');
+        $this->validators = array('validate_nimi_length', 'validate_nimi_unique');
     }
 
     public static function findAll() {
@@ -16,6 +16,9 @@ class Tuoteluokka extends BaseModel {
         $query->execute();
         $rows = $query->fetchAll();
 
+//        $query2 = DB::connection()->prepare(('SELECT tl.tuoteluokka_id, tl.nimi, COUNT(lt.tuote) AS myynnissä FROM Tuoteluokka AS tl'
+//                . ' LEFT JOIN Luokan_tuote AS lt ON lt.tuoteluokka = tl.tuoteluokka_id'
+//                . ' GROUP BY tl.tuoteluokka_id ORDER BY tl.nimi');
         $tuoteluokat = array();
 
         foreach ($rows as $row) {
@@ -25,19 +28,26 @@ class Tuoteluokka extends BaseModel {
                 'tuotteita' => $row['määrä']   
             ));
         }
+        
+//        for ($index = 0; $index < count($tuoteluokat); $index++) {
+//            $tuoteluokat[$index]->myynnissa == 
+//        }
 
         return $tuoteluokat;
     }
 
     public static function findOne($id) {
-        $query = DB::connection()->prepare('SELECT * FROM Tuoteluokka WHERE tuoteluokka_id = :id LIMIT 1');
+        $query = DB::connection()->prepare('SELECT tuoteluokka_id, nimi, COUNT(tuote) AS määrä FROM Tuoteluokka '
+                . 'LEFT JOIN Luokan_tuote ON tuoteluokka = tuoteluokka_id '
+                . 'WHERE tuoteluokka_id = :id GROUP BY tuoteluokka_id LIMIT 1');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
 
         if ($row) {
             $tuoteluokka = new Tuoteluokka(array(
                 'tuoteluokka_id' => $row['tuoteluokka_id'],
-                'nimi' => $row['nimi']
+                'nimi' => $row['nimi'],
+                'tuotteita' => $row['määrä']    
             ));
 
             return $tuoteluokka;
@@ -51,8 +61,32 @@ class Tuoteluokka extends BaseModel {
         $this->tuoteluokka_id = $row['tuoteluokka_id'];
     }
     
-    public function validate_nimi() {
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE Tuoteluokka SET nimi = :nimi WHERE tuoteluokka_id = :id');
+        $query->execute(array('nimi' => $this->nimi, 'id' => $this->tuoteluokka_id));
+    }
+
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Tuoteluokka WHERE tuoteluokka_id = :id');
+        $query->execute(array('id' => $this->tuoteluokka_id));
+    }
+
+    public function validate_nimi_length() {
         return parent::validate_string_length('Nimi', $this->nimi, 2, 50);       
+    }
+    
+    public function validate_nimi_unique() {
+        $query = DB::connection()->prepare('SELECT * FROM Tuoteluokka WHERE nimi = :nimi LIMIT 1');
+        $query->execute(array('nimi' => $this->nimi));
+        $row = $query->fetch();
+        
+        $errors = array();
+        
+        if ($row || $this->nimi == 'Kaikki') {
+            $errors[] = 'Tämä nimi on jo käytössä'; 
+        }
+        
+        return $errors;
     }
     
     

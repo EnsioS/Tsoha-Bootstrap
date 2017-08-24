@@ -54,6 +54,20 @@ $routes->get('/tuoteluokka/:id', function($id){
     TuoteluokkaController::show($id);
 });
 
+// Tuoteluokan muokkaussivu
+$routes->get('/tuoteluokka/:id/edit', function($id){
+    TuoteluokkaController::edit($id);
+});
+// Tuoteluokan muokkaus
+$routes->post('/tuoteluokka/:id/edit', function($id){
+    TuoteluokkaController::update($id); 
+});
+
+// Tuoteluokan poisto
+$routes->post('/tuoteluokka/:id/destroy', function($id){
+    TuoteluokkaController::destroy($id);  
+});
+
 // Tuotteen lisääminen tuoteluokkaan
 //   Tuotteen lisääminen tuoteluokkaan
 $routes->post('/tuoteluokka/:id/lisaa/tuote', function($id){
@@ -64,6 +78,7 @@ $routes->get('/tuoteluokka/:id/lisaa/tuote', function($id){
     TuoteController::form($id);
 });
 
+// Tuotteen poisto
 $routes->post('/tuote/:id/destroy', function($id){
     TuoteController::destroy($id);  
 });

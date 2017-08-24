@@ -32,7 +32,7 @@
             <td>4</td>
             <td>{{tuotteita}}</td>
             {% if user_logged_in.meklari %}
-            <th><a class="btn btn-default btn-sm" href="#">Muokkaa</a></th>
+            <th></th>
             {% endif %}
         </tr>
         {% for tuoteluokka in tuoteluokat %}
@@ -41,7 +41,14 @@
             <td>4</td>
             <td>{{tuoteluokka.tuotteita}}</td>
             {% if user_logged_in.meklari %}
-            <th><a class="btn btn-default btn-sm" href="#">Muokkaa</a></th>
+            <th>
+                <form method="post" action="{{base_path}}/tuoteluokka/{{tuoteluokka.tuoteluokka_id}}/destroy" class="destroy-form" data-confirm="Oletko varma, että haluat poistaa tuotteluokan?">
+                    <a class="btn btn-default btn-sm" href="{{base_path}}/tuoteluokka/{{tuoteluokka.tuoteluokka_id}}/edit">Muokkaa</a>
+                    {% if tuoteluokka.tuotteita == 0 %}
+                    <button type="submit" class="btn btn-danger btn-sm">Poista</button>         
+                    {% endif %}
+                </form>         
+            </th>
             {% endif %}
         </tr>
         {% endfor %}

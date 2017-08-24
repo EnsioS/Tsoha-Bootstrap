@@ -1,0 +1,19 @@
+{% import "macros/forms.html" as forms %}
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Muokkaa tuoteluokkaa {{attributes.tuoteluokka_id}}</h1>
+
+ {{forms.error_messages(errors)}}
+
+<form method="post" action="{{base_path}}/tuoteluokka/{{attributes.tuoteluokka_id}}/edit">
+    <div class="form-group">
+        <label>Nimi</label>
+        <input class="form-control" name="nimi" type="text" value="{{attributes.nimi}}">
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Muokkaa tuoteluokkaa</button>
+</form>
+
+{% endblock %}
