@@ -29,8 +29,8 @@
     <tbody>
         <tr>
             <td><a href="{{base_path}}/tuotteet">Kaikki</a></td>
-            <td>4</td>
-            <td>{{tuotteita}}</td>
+            <td>{{tuotteita[1]}}</td>
+            <td>{{tuotteita[0]}}</td>
             {% if user_logged_in.meklari %}
             <th></th>
             {% endif %}
@@ -38,7 +38,7 @@
         {% for tuoteluokka in tuoteluokat %}
         <tr>
             <td><a href="{{base_path}}/tuoteluokka/{{tuoteluokka.tuoteluokka_id}}">{{tuoteluokka.nimi}}</a></td>
-            <td>4</td>
+            <td>{{tuoteluokka.myynnissa}}</td>
             <td>{{tuoteluokka.tuotteita}}</td>
             {% if user_logged_in.meklari %}
             <th>

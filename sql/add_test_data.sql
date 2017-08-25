@@ -9,11 +9,11 @@ INSERT INTO Tuoteluokka (nimi) VALUES ('Taide');
 
 -- Lisätään tuotteita
 INSERT INTO Tuote (nimi, kuvaus, kauppa_alkaa, kauppa_loppuu, minimihinta, linkki_kuvaan) 
-VALUES ('Kesämökki', 'Hyvien kulkuyhteyksien varrella.','2004-10-19 10:23:54+02', '2004-10-30 10:23:54+02', 30, 'https://upload.wikimedia.org/wikipedia/commons/e/e4/White_House_02.jpg');
-INSERT INTO Tuote (nimi, kuvaus, minimihinta, linkki_kuvaan)
-VALUES ('Moderni asunto 1', 'Nimi kertoo kaiken.', '100', 'https://upload.wikimedia.org/wikipedia/commons/a/af/All_Gizah_Pyramids.jpg');
-INSERT INTO Tuote (nimi, kuvaus, minimihinta, linkki_kuvaan)
-VALUES ('Moderni asunto 2', 'Nimi kertoo kaiken.', '100', 'https://upload.wikimedia.org/wikipedia/commons/a/af/All_Gizah_Pyramids.jpg');
+VALUES ('Kesämökki', 'Hyvien kulkuyhteyksien varrella.','2014-10-19 10:23:54+02', '2018-10-30 10:23:54+02', 30, 'https://upload.wikimedia.org/wikipedia/commons/e/e4/White_House_02.jpg');
+INSERT INTO Tuote (nimi, kuvaus, kauppa_alkaa, kauppa_loppuu, minimihinta, linkki_kuvaan)
+VALUES ('Moderni asunto 1', 'Nimi kertoo kaiken.', '2017-07-01 00:00:00', '2017-09-01 00:00:00', '100', 'https://upload.wikimedia.org/wikipedia/commons/a/af/All_Gizah_Pyramids.jpg');
+INSERT INTO Tuote (nimi, kuvaus, kauppa_alkaa, kauppa_loppuu, minimihinta, linkki_kuvaan)
+VALUES ('Moderni asunto 2', 'Nimi kertoo kaiken.', '2004-10-19 10:23:54+02', '2004-10-30 10:23:54+02', '100', 'https://upload.wikimedia.org/wikipedia/commons/a/af/All_Gizah_Pyramids.jpg');
 INSERT INTO Tuote (nimi, kuvaus, minimihinta, linkki_kuvaan)
 VALUES ('Moderni asunto 3', 'Nimi kertoo kaiken.', '100', 'https://upload.wikimedia.org/wikipedia/commons/a/af/All_Gizah_Pyramids.jpg');
 INSERT INTO Tuote (nimi, kuvaus, minimihinta, linkki_kuvaan)

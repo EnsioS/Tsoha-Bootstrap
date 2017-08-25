@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1> Tee tarjous tuotteesta <b>{{tuote.nimi}}</b> </h1>
+
+<!--virheilmoitukset tulee tähän (jos niitä on)-->
+{{forms.error_messages(errors)}}
+
+<div class="col-md-4">
+    <div class="thumbnail " style="max-width:310px; max-height: 200px;">
+        <img src ="{{tuote.linkki_kuvaan}}" 
+             style="width:300px; height: 200px;">
+    </div>
+</div>
+
+<div class="col-md-8">
+    <p>
+        {% if tuote.max_tarjous %}
+        <b>Korkein tarjous <br>
+            {{tuote.max_tarjous}} &euro;</b></li>
+        {% else %}
+        <b>Tuotteen minimihinta <br>
+            {{tuote.minimihinta}} &euro;</b></li>
+        {% endif %}
+    </p>
+    <p>{{tuote.kuvaus}}</p>
+
+    <form method="post" action="#">
+        <div class="form-group">
+            <label>Summa</label>
+            <input class="form-control" name="summa" type="text" value="">
+        </div>
+        <div class="form-group">
+            <label>Nimi</label>
+            <input class="form-control" name="nimi" type="text" value="">
+        </div>
+        <div class="form-group">
+            <label>Sähköposti</label>
+            <input class="form-control" name="email" type="text" value="">
+        </div>
+        <div class="form-group">
+            <label>Kotiosoite</label>
+            <input class="form-control" name="osoite" type="text" value="">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Tarjoa tuotteesta</button>
+    </form>
+</div>
+
+
+{% endblock %}

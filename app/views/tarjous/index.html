@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Tarjouksesi</h1>
+<br>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Tuotteesta</th>
+            <th>summa</th>
+            <th>Korkein tarjous tuotteesta</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for tarjous in tarjoukset %}
+        <tr>
+            <th>
+                <a href="{{base_path}}/tuote/{{tarjous.tuotteesta}}">{{tarjous.tuotteen_nimi}}</a>
+            </th>
+            <th>{{tarjous.summa}}</th>
+            <th>{{tarjous.max_tuotteesta}}</th>
+        </tr>
+        {% endfor %}
+    </tbody>    
+</table>
+
+{% endblock %}

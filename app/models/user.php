@@ -2,7 +2,7 @@
 
 class User extends BaseModel {
     
-    public $id, $username, $password, $meklari;
+    public $id, $henkilotiedot, $username, $password, $meklari;
     
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -16,6 +16,7 @@ class User extends BaseModel {
         if ($row) {
             $user = new User(array(
                 'id' => $row['asiakastili_id'], 
+                'henkilotiedot' => $row['henkilotiedot'],
                 'username' => $row['kayttajatunnus'],
                 'password' => $row['salasana'],
                 'meklari' => $row['meklari']
@@ -35,7 +36,8 @@ class User extends BaseModel {
         
         if($row) {
             return new User(array(
-                'id' => $row['asiakastili_id'],
+                'id' => $row['asiakastili_id'], 
+                'henkilotiedot' => $row['henkilotiedot'],
                 'username' => $row['kayttajatunnus'],
                 'password' => $row['salasana'],
                 'meklari' => $row['meklari']

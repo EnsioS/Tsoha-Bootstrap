@@ -1,3 +1,4 @@
+{% import "macros/forms.html" as forms %}
 {% extends "base.html" %}
 
 {% block content %}
@@ -8,6 +9,9 @@
     {{message}}
 </div>
 {% endif %}
+
+<!--virheilmoitukset tulee tähän (jos niitä on)-->
+{{forms.error_messages(errors)}}
 
 <div class="col-sm-9">
     <div class="thumbnail">
@@ -37,11 +41,13 @@
         <p>
             {% if tuote.max_tarjous %}
             <b>Korkein tarjous <br>
-                {{tuote.max_tarjous}} &euro;</b></li>
+                {{tuote.max_tarjous}} &euro;</b>
             {% else %}
             <b>Tuotteen minimihinta <br>
-                {{tuote.minimihinta}} &euro;</b></li>
+                {{tuote.minimihinta}} &euro;</b>
             {% endif %}
+            
+            
         </p>
     </div>
 </div>
@@ -53,17 +59,10 @@
     <br>
 </div>
 
-<p>
-    <!--    alkaa {{alkaa}} <br>
-        loppuu {{loppuu}} <br>-->
-    <!--    Kauppa alkaa {{tuote.kauppa_alkaa}} <br>
-        Kauppa päätty {{tuote.kauppa_loppuu}} <br>-->
-    <!--    nykyinen aika {{date().timestamp}}-->
-</p>
 
 {% if alkaa < date().timestamp and loppuu > date().timestamp %}
 <div class="col-md-3">
-    <button class="btn btn-primary">Tee tarjous</button> 
+    <a href="{{base_path}}/tuote/{{tuote.tuote_id}}/tarjous" class="btn btn-primary">Tee tarjous</a> 
     <p> <br> <p>
 </div>
 {% endif %}

@@ -13,7 +13,7 @@ class TuoteController extends BaseController {
 
         $timestamp_alkaa = tuote::timestamp_to_int_format($tuote->kauppa_alkaa);
         $timestamp_loppuu = tuote::timestamp_to_int_format($tuote->kauppa_loppuu);
-        
+
         View::make('tuote/show.html', array('tuote' => $tuote, 'alkaa' => $timestamp_alkaa, 'loppuu' => $timestamp_loppuu));
     }
 
@@ -51,7 +51,7 @@ class TuoteController extends BaseController {
         self::check_logged_in_as_meklari();
         $tuote = Tuote::findOne($id);
         View::make('tuote/edit.html', array('attributes' => $tuote
-                ));
+        ));
     }
 
     public static function update($id) {
@@ -82,10 +82,20 @@ class TuoteController extends BaseController {
 
     public static function destroy($id) {
         self::check_logged_in_as_meklari();
-        $tuote = new Tuote(array('tuote_id' => $id));
-        $tuote->destroy();
+        $tuote = Tuote::findOne($id);
 
-        Redirect::to('/tuotteet', array('message' => 'Tuote on poistettu onnistuneesti'));
+        if ($tuote->kauppa_alkaa < time() && $tuote->kauppa_loppuu < time()) {
+            $errors = array('Tuotetta, joka on myynnissä, ei voi poistaa');
+
+            $timestamp_alkaa = tuote::timestamp_to_int_format($tuote->kauppa_alkaa);
+            $timestamp_loppuu = tuote::timestamp_to_int_format($tuote->kauppa_loppuu);
+
+            View::make('tuote/show.html', array('errors' => $errors, 'tuote' => $tuote, 'alkaa' => $timestamp_alkaa, 'loppuu' => $timestamp_loppuu));
+        } else {
+            $tuote->destroy();
+
+            Redirect::to('/tuotteet', array('message' => 'Tuote on poistettu onnistuneesti'));
+        }
     }
 
 }

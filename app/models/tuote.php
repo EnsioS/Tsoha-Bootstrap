@@ -4,7 +4,7 @@ class Tuote extends BaseModel {
 
     // Attribuutit
     public $tuote_id, $nimi, $kuvaus, $kauppa_alkaa, $kauppa_loppuu, $minimihinta, $max_tarjous, $linkki_kuvaan;
- 
+
     public function __construct($attributes) {
         parent::__construct($attributes);
         $this->validators = array('validate_nimi', 'validate_kuvaus', 'validate_minimihinta',
@@ -87,11 +87,13 @@ class Tuote extends BaseModel {
     }
 
     public static function count() {
-        $query = DB::connection()->prepare('SELECT COUNT(tuote_id) as maara FROM Tuote');
+        $query = DB::connection()->prepare('SELECT COUNT(tuote_id) as määrä, '
+                . 'COUNT(CASE WHEN kauppa_alkaa < NOW() AND kauppa_loppuu > NOW() THEN 1 END) AS myynnissä FROM Tuote');
         $query->execute();
+
         $count = $query->fetch();
 
-        return $count['maara'];
+        return array($count['määrä'], $count['myynnissä']);
     }
 
     public function save($id) {
@@ -141,26 +143,16 @@ class Tuote extends BaseModel {
 
     public function validate_alkaa_before_loppuu() {
         $errors = array();
-        
+
         if (self::timestamp_to_int_format($this->kauppa_alkaa) > self::timestamp_to_int_format($this->kauppa_loppuu)) {
             $errors[] = 'Kaupan tulee alkaa ennen kuin se päättyy';
         }
-        
-        return $errors;    
+
+        return $errors;
     }
 
     public function validate_minimihinta() {
-        $errors = array();
-
-        if (!is_numeric($this->minimihinta)) {
-            $errors[] = 'Minimihinnan tulee olla kokonaisluku';
-
-            if ($this->minimihinta < 1) {
-                $errors[] = 'Minimihinta ei saa olla nolla tai negatiivinen';
-            }
-        }
-
-        return $errors;
+        return parent::validate_natural_number('Minimihinta', $this->minimihinta);
     }
 
 }

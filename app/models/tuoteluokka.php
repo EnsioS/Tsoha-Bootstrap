@@ -10,22 +10,21 @@ class Tuoteluokka extends BaseModel {
     }
 
     public static function findAll() {
-        $query = DB::connection()->prepare('SELECT tl.tuoteluokka_id, tl.nimi, COUNT(lt.tuote) AS määrä FROM Tuoteluokka AS tl'
-                . ' LEFT JOIN Luokan_tuote AS lt ON lt.tuoteluokka = tl.tuoteluokka_id'
-                . ' GROUP BY tl.tuoteluokka_id ORDER BY tl.nimi');
+        $query = DB::connection()->prepare('SELECT tl.tuoteluokka_id, tl.nimi, COUNT(lt.tuote) AS määrä,'
+            .' COUNT(CASE WHEN t.kauppa_alkaa < NOW() AND t.kauppa_loppuu > NOW() THEN 1 END) AS myynnissä' 
+            .' FROM Tuoteluokka AS tl LEFT JOIN Luokan_tuote AS lt ON lt.tuoteluokka = tl.tuoteluokka_id' 
+            .' LEFT JOIN Tuote AS t ON t.tuote_id = lt.tuote GROUP BY tl.tuoteluokka_id ORDER BY tl.nimi');
         $query->execute();
         $rows = $query->fetchAll();
 
-//        $query2 = DB::connection()->prepare(('SELECT tl.tuoteluokka_id, tl.nimi, COUNT(lt.tuote) AS myynnissä FROM Tuoteluokka AS tl'
-//                . ' LEFT JOIN Luokan_tuote AS lt ON lt.tuoteluokka = tl.tuoteluokka_id'
-//                . ' GROUP BY tl.tuoteluokka_id ORDER BY tl.nimi');
         $tuoteluokat = array();
 
         foreach ($rows as $row) {
             $tuoteluokat[] = new Tuoteluokka(array(
                 'tuoteluokka_id' => $row['tuoteluokka_id'],
                 'nimi' => $row['nimi'], 
-                'tuotteita' => $row['määrä']   
+                'tuotteita' => $row['määrä'],
+                'myynnissa' => $row['myynnissä']
             ));
         }
         

@@ -8,14 +8,6 @@ $routes->get('/hiekkalaatikko', function() {
 HelloWorldController::sandbox();
 });
 
-//$routes->get('/tuoteluokat', function() {
-//HelloWorldController::tuoteluokat();
-//});
-
-//$routes->get('/tuoteluokka', function() {
-//    HelloWorldController::tuoteluokka();
-//});
-
 $routes->get('/tuote', function() {
 HelloWorldController::tuote();
 });
@@ -95,4 +87,13 @@ $routes->post('/login', function(){
 //    Ulos kirjautuminen
 $routes->post('/logout', function(){
     UserController::logout();
+});
+
+// Asiakkaan tekemien tarjousten näyttäminen
+$routes->get('/:id/tarjoukset', function($id){
+    TarjousController::index($id);
+});
+
+$routes->get('/tuote/:id/tarjous', function($id){
+TarjousController::form($id);
 });
