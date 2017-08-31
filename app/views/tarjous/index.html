@@ -9,6 +9,7 @@
             <th>Tuotteesta</th>
             <th>summa</th>
             <th>Korkein tarjous tuotteesta</th>
+            <th>Kaupan päättymisaika</th>
         </tr>
     </thead>
 
@@ -20,6 +21,11 @@
             </th>
             <th>{{tarjous.summa}}</th>
             <th>{{tarjous.max_tuotteesta}}</th>
+            <th>{{tarjous.kauppa_loppuu|date('Y-m-d h:i:s')}}
+            {% if tarjous.kauppa_loppuu < date().timestamp %}
+             (päättynyt)
+            {% endif %}
+            </th>
         </tr>
         {% endfor %}
     </tbody>    

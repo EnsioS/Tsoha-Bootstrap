@@ -23,7 +23,8 @@
 <div class="col-md-3">
     <div class="important">
         <p class="important1">
-            {% if alkaa < date().timestamp and loppuu > date().timestamp %}
+<!--            {{loppuu|date('Y-m-d h:i:s')}}-->
+            {% if alkaa < date().timestamp and loppuu > date().timestamp %}            
             Aikaa jäljellä <br>
             {{((loppuu - date().timestamp)/(24*3600))|round(0,'floor')}} päivää
             {{(((loppuu- date().timestamp) - ((loppuu - date().timestamp)/(24*3600))|round(0,'floor')*24*3600)/3600)|round(0,'floor')}} h

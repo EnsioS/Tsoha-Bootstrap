@@ -35,7 +35,6 @@ class TuoteController extends BaseController {
         );
 
         $tuote = new Tuote($attributes);
-
         $errors = $tuote->errors();
 
         if (count($errors) == 0) {

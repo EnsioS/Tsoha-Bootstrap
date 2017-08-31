@@ -1,3 +1,4 @@
+{% import "macros/forms.html" as forms %}
 {% extends "base.html" %}
 
 {% block content %}
@@ -24,23 +25,24 @@
         {% endif %}
     </p>
     <p>{{tuote.kuvaus}}</p>
-
-    <form method="post" action="#">
+  
+    <form method="post" action="{{base_path}}/tuote/{{id}}/tarjous">
+            <input class="hidden" name="id" type="text" value="{{user_logged_in.id}}">
         <div class="form-group">
             <label>Summa</label>
             <input class="form-control" name="summa" type="text" value="">
         </div>
         <div class="form-group">
             <label>Nimi</label>
-            <input class="form-control" name="nimi" type="text" value="">
+            <input class="form-control" name="nimi" type="text" value="{{henkilotiedot.nimi}}">
         </div>
         <div class="form-group">
             <label>Sähköposti</label>
-            <input class="form-control" name="email" type="text" value="">
+            <input class="form-control" name="sahkoposti" type="text" value="{{henkilotiedot.sahkoposti}}">
         </div>
         <div class="form-group">
             <label>Kotiosoite</label>
-            <input class="form-control" name="osoite" type="text" value="">
+            <input class="form-control" name="osoite" type="text" value="{{henkilotiedot.osoite}}">
         </div>
 
         <button type="submit" class="btn btn-primary">Tarjoa tuotteesta</button>

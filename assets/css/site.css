@@ -43,13 +43,12 @@
 }
 
 #Container {
-/*    width: 280px;*/
     width: 100%;
     height: 170px;
 }
 
 #Container img  {
-    max-width:  280px;
+    max-width:  340px;
     max-height: 100%;
 }
 
