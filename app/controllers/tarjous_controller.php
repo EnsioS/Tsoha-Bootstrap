@@ -64,7 +64,8 @@ class TarjousController extends BaseController {
 
             Redirect::to('/tuote/' . $id);
         } else {
-            View::make('tarjous/add.html', array('errors' => $errors, 'attributes' => $attributes));
+            $henkilotiedot = Henkilotiedot::findOne($henkilo_id);
+            View::make('tarjous/add.html', array('errors' => $errors, 'id' => $id, 'tuote' => $tuote, 'henkilotiedot' => $henkilotiedot, 'summa' => $params['summa']));
         }
     }
 

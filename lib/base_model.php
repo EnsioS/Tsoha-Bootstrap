@@ -53,7 +53,7 @@ class BaseModel {
         if (!is_numeric($input) || ($input - floor($input) > 0)) {
             $errors[] = $valitaded . '-kentän arvon tulee olla kokonaisluku';
 
-            if ($this->minimihinta < 1) {
+            if ($input < 1) {
                 $errors[] = $valitaded . ' ei saa olla nolla tai negatiivinen';
             }
         }
