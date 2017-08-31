@@ -44,6 +44,9 @@
                         <!-- Navigaation linkit -->
                         <li><a href="{{base_path}}">Etusivu</a></li>
                         <li><a href="http://ensu.users.cs.helsinki.fi/kissaemoji-huutokauppa/tuoteluokat">Tuoteluokat</a></li>                       
+                        {% if user_logged_in %}
+                        <li><a href="{{base_path}}/{{user_logged_in.henkilotiedot}}/tarjoukset">Tarjouksesi</a></li>
+                        {% endif %}
                     </ul>
 
                     <div class="navbar-form navbar-left  search-form">

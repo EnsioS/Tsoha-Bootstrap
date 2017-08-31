@@ -9,7 +9,34 @@ class Tarjous extends BaseModel {
         $this->validators = array('validate_summa_is_natural_number', 'validate_summa_is_large_enough');
     }
 
-    public static function findByHenkilotiodot($id) {
+    public static function findAll() {
+        $query = DB::connection()->prepare('SELECT tuote_id, tarjous_id, nimi, summa, henkilotiedot, max, kauppa_loppuu FROM Tarjous'
+                . ' LEFT JOIN Tuote ON tuote_id = tuote'
+                . ' LEFT JOIN '
+                . '   (SELECT tuote_id AS t_id, MAX(summa) AS max FROM Tuote '
+                . '    LEFT JOIN Tarjous ON tuote = tuote_id GROUP BY tuote_id)'
+                . ' AS M_t ON tuote_id = t_id ORDER BY tarjous_id DESC');
+        $query->execute();
+        $rows = $query->fetchAll();
+
+        $tarjoukset = array();
+
+        foreach ($rows as $row) {
+            $tarjoukset[] = new Tarjous(array(
+                'tarjous_id' => $row['tarjous_id'],
+                'tuotteesta' => $row['tuote_id'],
+                'tuotteen_nimi' => $row['nimi'],
+                'summa' => $row['summa'],
+                'henkilotiedot' => $row['henkilotiedot'],
+                'max_tuotteesta' => $row['max'],
+                'kauppa_loppuu' => self::timestamp_to_int_format($row['kauppa_loppuu'])
+            ));
+        }
+
+        return $tarjoukset;
+    }
+
+    public static function findByHenkilotiedot($id) {
         $query = DB::connection()->prepare('SELECT tuote_id, nimi, summa, max, kauppa_loppuu FROM Tarjous'
                 . ' LEFT JOIN Tuote ON tuote_id = tuote'
                 . ' LEFT JOIN '
@@ -54,8 +81,6 @@ class Tarjous extends BaseModel {
         if ($this->summa > 1 && $this->summa < floor(1.05 * $tuote->max_tarjous + 1)) {
             $errors[] = 'Tarjouksen summan tulee vähintään 5% (' .
                     floor(0.05 * $tuote->max_tarjous + 1) . ' €) olla edellistä tarjousta korkeampi';
-
-            return $errors;
         }
 
         return $errors;

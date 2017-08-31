@@ -6,7 +6,7 @@ CREATE TABLE Tuoteluokka(
 CREATE TABLE Tuote(
     tuote_id SERIAL PRIMARY KEY,
     nimi varchar(100) NOT NULL,
-    kuvaus text NOT NULL,   
+    kuvaus varchar(1500) NOT NULL,   
     kauppa_alkaa timestamp,
     kauppa_loppuu timestamp,
     minimihinta INTEGER NOT NULL,

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Seurantalista</h1>
+<br>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Tarjous_id</th>
+            <th>Tuotteesta</th>
+            <th>Tarjoaja</th>
+            <th>Summa</th>           
+            <th>Korkein tarjous tuotteesta</th>
+            <th>Kaupan päättymisaika</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for tarjous in tarjoukset %}
+        <tr>
+            <th>{{tarjous.tarjous_id}}</th>
+            <th>
+                <a href="{{base_path}}/tuote/{{tarjous.tuotteesta}}">{{tarjous.tuotteen_nimi}}</a>
+            </th>
+            <th>{{tarjous.henkilotiedot}}</th>
+            <th>{{tarjous.summa}}</th>
+            <th>{{tarjous.max_tuotteesta}}</th>
+            <th>{{tarjous.kauppa_loppuu|date('Y-m-d h:i:s')}}
+            {% if tarjous.kauppa_loppuu < date().timestamp %}
+             (päättynyt)
+            {% endif %}
+            </th>
+        </tr>
+        {% endfor %}
+    </tbody>    
+</table>
+
+{% endblock %}

@@ -130,7 +130,7 @@ class Tuote extends BaseModel {
     }
 
     public function validate_kuvaus() {
-        return parent::validate_string_length('Kuvaus', $this->kuvaus, 4, 100000);
+        return parent::validate_string_length('Kuvaus', $this->kuvaus, 4, 1500);
     }
 
     public function validate_kauppa_alkaa() {
