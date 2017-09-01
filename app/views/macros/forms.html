@@ -13,6 +13,7 @@
 
 {% endmacro %}
 
+
 {% macro message(message, class) %}
 
 {% if message|length > 1 %}
@@ -50,7 +51,7 @@
         <label>Linkki kuvaan</label>
         <input class="form-control" name="linkki" type="text" value="{{attributes.linkki_kuvaan}}">
     </div>    
-    
+
     <button type="submit" class="btn btn-primary">{{button_text}}</button>
 </form>
 {% endmacro %}

@@ -8,7 +8,7 @@ class HelloWorldController extends BaseController {
         // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
         $tuoteluokat = Tuoteluokka::findAll();
         $tuotteet = Tuote::findAll();
-        
+
         View::make('suunnitelmat/etusivu.html', array('tuoteluokat' => $tuoteluokat, 'tuotteet' => $tuotteet));
     }
 
@@ -23,7 +23,7 @@ class HelloWorldController extends BaseController {
     public static function tuote() {
         View::make('suunnitelmat/tuote.html');
     }
-    
+
     public static function sandbox() {
         // Testaa koodiasi täällä
 //        $a = new Tuoteluokka(array(
@@ -33,9 +33,10 @@ class HelloWorldController extends BaseController {
 //        $errors = $a->errors();
 //        
 //        Kint::dump($errors);
-        
+
         $maara = Tuote::count();
-        
-        Kint::dump('Tuotteita yhteensä '. $maara);
+
+        Kint::dump('Tuotteita yhteensä ' . $maara);
     }
+
 }

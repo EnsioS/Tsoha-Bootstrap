@@ -1,5 +1,6 @@
 <?php
 
+// Etusivu
 $routes->get('/', function() {
     HelloWorldController::index();
 });
@@ -8,9 +9,6 @@ $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
 });
 
-$routes->get('/tuote', function() {
-    HelloWorldController::tuote();
-});
 
 // Listaa kaikki tuotteet
 $routes->get('/tuotteet', function () {
@@ -31,6 +29,7 @@ $routes->post('/tuote/:id/edit', function($id) {
     TuoteController::update($id);
 });
 
+
 // Tuoteluokan lisäys
 $routes->post('/tuoteluokat', function() {
     TuoteluokkaController::store();
@@ -50,6 +49,7 @@ $routes->get('/tuoteluokka/:id', function($id) {
 $routes->get('/tuoteluokka/:id/edit', function($id) {
     TuoteluokkaController::edit($id);
 });
+
 // Tuoteluokan muokkaus
 $routes->post('/tuoteluokka/:id/edit', function($id) {
     TuoteluokkaController::update($id);
@@ -107,7 +107,6 @@ $routes->post('/tuote/:id/tarjous', function($id) {
 $routes->get('/seurantalista', function() {
     TarjousController::seurantalista();
 });
-
 // Tarjouksen tarkastelusivu
 $routes->get('/tarjous/:id', function($id) {
     TarjousController::show($id);

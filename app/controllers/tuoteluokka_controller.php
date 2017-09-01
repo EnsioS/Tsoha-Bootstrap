@@ -18,6 +18,7 @@ class TuoteluokkaController extends BaseController {
 
     public static function store() {
         $params = $_POST;
+
         $attributes = array(
             'nimi' => $params['nimi']
         );
@@ -74,7 +75,7 @@ class TuoteluokkaController extends BaseController {
             Redirect::to('/tuoteluokat', array('message' => 'Tuoteluokka on poistettu onnistuneesti'));
         } else {
             $errors = array('Tuoteluokkaa, jossa on tuotteita, ei voi poistaa');
-            
+
             View::make('/tuoteluokat', array('errors' => $errors));
         }
     }

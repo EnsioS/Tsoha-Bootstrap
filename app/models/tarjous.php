@@ -51,7 +51,6 @@ class Tarjous extends BaseModel {
 
         foreach ($rows as $row) {
             $tarjoukset[] = new Tarjous(array(
-//                'tarjous_id' => $row['tarjous_id'],
                 'tuotteesta' => $row['tuote_id'],
                 'tuotteen_nimi' => $row['nimi'],
                 'summa' => $row['summa'],
@@ -62,12 +61,12 @@ class Tarjous extends BaseModel {
 
         return $tarjoukset;
     }
-    
+
     public static function findOne($id) {
         $query = DB::connection()->prepare('SELECT * FROM Tarjous WHERE tarjous_id = :id LIMIT 1');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
-        
+
         if ($row) {
             $tarjous = new Tarjous(array(
                 'tarjous_id' => $id,
@@ -75,10 +74,10 @@ class Tarjous extends BaseModel {
                 'henkilotiedot' => $row['henkilotiedot'],
                 'summa' => $row['summa']
             ));
-            
+
             return $tarjous;
         }
-        
+
         return null;
     }
 

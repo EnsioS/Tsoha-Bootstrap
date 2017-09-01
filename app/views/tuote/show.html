@@ -22,14 +22,11 @@
 
 <div class="col-md-3">
     <div class="important">
-        <p class="important1">
-<!--            {{loppuu|date('Y-m-d h:i:s')}}-->
-            {% if alkaa < date().timestamp and loppuu > date().timestamp %}            
-            Aikaa jäljellä <br>
-            {{((loppuu - date().timestamp)/(24*3600))|round(0,'floor')}} päivää
-            {{(((loppuu- date().timestamp) - ((loppuu - date().timestamp)/(24*3600))|round(0,'floor')*24*3600)/3600)|round(0,'floor')}} h
-            {{(((loppuu - date().timestamp)-((loppuu - date().timestamp)/(24*3600))|round(0,'floor')*24*3600-(((loppuu- date().timestamp) - ((loppuu - date().timestamp)/(24*3600))|round(0,'floor')*24*3600)/3600)|round(0,'floor')*3600)/60)|round(0,'floor')}} min
-            {% elseif alkaa > date().timestamp %} 
+        <span id="alkaa" hidden="">{{alkaa}}</span>
+        <span id="loppuu" hidden="">{{loppuu}}</span>
+        <p id="count" class="important1">            
+            <!--Jos kauppa käynnissä, asetetaan aika javascriptillä tiedostossa site.js-->
+            {% if alkaa > date().timestamp %} 
             Kauppa alkaa <br>
             {{tuote.kauppa_alkaa}}
             {% elseif loppuu < 1 %}
@@ -47,8 +44,8 @@
             <b>Tuotteen minimihinta <br>
                 {{tuote.minimihinta}} &euro;</b>
             {% endif %}
-            
-            
+
+
         </p>
     </div>
 </div>
@@ -69,10 +66,10 @@
 {% endif %}
 
 {% if user_logged_in.meklari %}
-    <form method="post" action="{{base_path}}/tuote/{{tuote.tuote_id}}/destroy" class="destroy-form col-md-3" data-confirm="Oletko varma, että haluat poistaa tuotteen?">
-        <a href="{{base_path}}/tuote/{{tuote.tuote_id}}/edit" class="btn btn-default">Muokkaa</a>
-        <button type="submit" class="btn btn-danger">Poista</button>         
-    </form>
+<form method="post" action="{{base_path}}/tuote/{{tuote.tuote_id}}/destroy" class="destroy-form col-md-3" data-confirm="Oletko varma, että haluat poistaa tuotteen?">
+    <a href="{{base_path}}/tuote/{{tuote.tuote_id}}/edit" class="btn btn-default">Muokkaa</a>
+    <button type="submit" class="btn btn-danger">Poista</button>         
+</form>
 {% endif %}    
 
 

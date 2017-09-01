@@ -25,6 +25,7 @@ class TuoteController extends BaseController {
     public static function store($id) {
         self::check_logged_in_as_meklari();
         $params = $_POST;
+
         $attributes = array(
             'nimi' => $params['nimi'],
             'kuvaus' => $params['kuvaus'],
@@ -49,8 +50,7 @@ class TuoteController extends BaseController {
     public static function edit($id) {
         self::check_logged_in_as_meklari();
         $tuote = Tuote::findOne($id);
-        View::make('tuote/edit.html', array('attributes' => $tuote
-        ));
+        View::make('tuote/edit.html', array('attributes' => $tuote));
     }
 
     public static function update($id) {

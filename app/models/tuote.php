@@ -7,8 +7,8 @@ class Tuote extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_nimi', 'validate_kuvaus', 'validate_minimihinta',
-            'validate_kauppa_alkaa', 'validate_kauppa_loppuu', 'validate_alkaa_before_loppuu');
+        $this->validators = array('validate_nimi', 'validate_kuvaus', 'validate_minimihinta', 'validate_kauppa_alkaa',
+            'validate_kauppa_loppuu', 'validate_alkaa_before_loppuu', 'validate_alkaa_and_loppuu_after_now');
     }
 
     public static function findAll() {
@@ -23,9 +23,6 @@ class Tuote extends BaseModel {
             $tuotteet[] = new Tuote(array(
                 'tuote_id' => $row['tuote_id'],
                 'nimi' => $row['nimi'],
-//                'kuvaus' => $row['kuvaus'],
-//                'kauppa_alkaa' => $row['kauppa_alkaa'],
-//                'kauppa_loppuu' => $row['kauppa_loppuu'],
                 'minimihinta' => $row['minimihinta'],
                 'max_tarjous' => $row['max'],
                 'linkki_kuvaan' => $row['linkki_kuvaan']
@@ -146,6 +143,22 @@ class Tuote extends BaseModel {
 
         if (self::timestamp_to_int_format($this->kauppa_alkaa) > self::timestamp_to_int_format($this->kauppa_loppuu)) {
             $errors[] = 'Kaupan tulee alkaa ennen kuin se päättyy';
+        }
+
+        return $errors;
+    }
+
+    public function validate_alkaa_and_loppuu_after_now() {
+        $errors = array();
+
+        $now = time();
+
+        if (self::timestamp_to_int_format($this->kauppa_alkaa) < $now) {
+            $errors[] = 'Kaupan alkamisaika ei saa olla menneisyydessä!';
+        }
+
+        if (self::timestamp_to_int_format($this->kauppa_loppuu) < $now) {
+            $errors[] = 'Kaupan päättymisaika ei saa olla menneisyydessä!';
         }
 
         return $errors;
