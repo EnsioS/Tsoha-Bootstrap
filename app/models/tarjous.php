@@ -62,6 +62,25 @@ class Tarjous extends BaseModel {
 
         return $tarjoukset;
     }
+    
+    public static function findOne($id) {
+        $query = DB::connection()->prepare('SELECT * FROM Tarjous WHERE tarjous_id = :id LIMIT 1');
+        $query->execute(array('id' => $id));
+        $row = $query->fetch();
+        
+        if ($row) {
+            $tarjous = new Tarjous(array(
+                'tarjous_id' => $id,
+                'tuotteesta' => $row['tuote'],
+                'henkilotiedot' => $row['henkilotiedot'],
+                'summa' => $row['summa']
+            ));
+            
+            return $tarjous;
+        }
+        
+        return null;
+    }
 
     public function save() {
         $query = DB::connection()->prepare('INSERT INTO Tarjous (tuote, henkilotiedot, summa) '

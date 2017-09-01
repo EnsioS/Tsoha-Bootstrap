@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1> Tarjous tuotteesta <b>{{tuote.nimi}}</b> </h1>
+
+<div class="col-md-4">
+    <div class="thumbnail " style="max-width:310px; max-height: 200px;">
+        <img src ="{{tuote.linkki_kuvaan}}" 
+             style="width:300px; height: 200px;">
+    </div>
+</div>
+
+<div class="col-md-6">
+    <p>
+        <b>Korkein tarjous:  {{tuote.max_tarjous}} &euro;</b></li>
+        <br>        
+        <b>Tuotteen minimihinta:  {{tuote.minimihinta}} &euro;</b></li>
+    </p>
+    <p>{{tuote.kuvaus}}</p>
+
+    <div class="jumbotron">
+        <label>Summa: </label>
+        {{tarjous.summa}} &euro;
+        <br>
+        <label>Nimi: </label>
+        {{henkilotiedot.nimi}}
+        <br>->
+        <label>Sähköposti: </label>
+        {{henkilotiedot.sahkoposti}}
+        <br>
+        <label>Kotiosoite: </label>
+        {{henkilotiedot.osoite}}
+    </div>
+</div>
+
+{% endblock %}

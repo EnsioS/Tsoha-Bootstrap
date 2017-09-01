@@ -47,19 +47,10 @@
                         {% if user_logged_in %}
                         <li><a href="{{base_path}}/{{user_logged_in.henkilotiedot}}/tarjoukset">Tarjouksesi</a></li>
                         {% endif %}
+                        {% if user_logged_in.meklari %}
+                        <li><a href="{{base_path}}/seurantalista">Seurantalista</a></li>
+                        {% endif %}
                     </ul>
-
-                    <div class="navbar-form navbar-left  search-form">
-                        <!--              <form method="get" action="/fi/haku/">-->
-                        <div class="input-group">
-                            <input type="text" name="term" class="search form-control blink" placeholder="Syötä hakusana">
-
-                            <span class="input-group-btn">
-                                <button title="Hae" class="btn btn-primary search-btn" type="submit">Hae</button>
-                            </span>
-                        </div>
-                        <!--</form>-->
-                    </div> 
 
                     {% if user_logged_in %}
                     <form class="navbar-form navbar-right" method="post" action="{{base_path}}/logout">
@@ -73,8 +64,6 @@
                 </div>
             </div>
         </nav>
-
-        <!--btn btn-danger navbar-btn--> 
 
         <div id="main-container">
             <!-- Dynaaminen sisältö tulee tähän -->

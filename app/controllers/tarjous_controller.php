@@ -23,6 +23,14 @@ class TarjousController extends BaseController {
 
         View::make('tarjous/index.html', array('tarjoukset' => $tarjoukset));
     }
+    
+    public static function show($id) {
+        $tarjous = Tarjous::findOne($id);
+        $tuote = Tuote::findOne($tarjous->tuotteesta);
+        $henkilotiedot = Henkilotiedot::findOne($tarjous->henkilotiedot);
+        
+        View::make('tarjous/show.html', array('tarjous' => $tarjous, 'tuote' => $tuote, 'henkilotiedot' => $henkilotiedot));
+    }
 
     public static function form($id) {
         $tuote = Tuote::findOne($id);

@@ -18,7 +18,7 @@
     <tbody>
         {% for tarjous in tarjoukset %}
         <tr>
-            <th>{{tarjous.tarjous_id}}</th>
+            <th><a href="{{base_path}}/tarjous/{{tarjous.tarjous_id}}">{{tarjous.tarjous_id}}</a></th>
             <th>
                 <a href="{{base_path}}/tuote/{{tarjous.tuotteesta}}">{{tarjous.tuotteen_nimi}}</a>
             </th>

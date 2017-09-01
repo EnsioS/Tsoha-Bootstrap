@@ -107,3 +107,8 @@ $routes->post('/tuote/:id/tarjous', function($id) {
 $routes->get('/seurantalista', function() {
     TarjousController::seurantalista();
 });
+
+// Tarjouksen tarkastelusivu
+$routes->get('/tarjous/:id', function($id) {
+    TarjousController::show($id);
+});
