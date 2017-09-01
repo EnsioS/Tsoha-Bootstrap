@@ -25,6 +25,8 @@ class TarjousController extends BaseController {
     }
 
     public static function show($id) {
+        parent::check_logged_in_as_meklari();
+        
         $tarjous = Tarjous::findOne($id);
         $tuote = Tuote::findOne($tarjous->tuotteesta);
         $henkilotiedot = Henkilotiedot::findOne($tarjous->henkilotiedot);
