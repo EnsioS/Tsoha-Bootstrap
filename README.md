@@ -5,7 +5,7 @@ Yleisiä linkkejä:
 * [Linkki sovellukseeni(etusivulle)](http://ensu.users.cs.helsinki.fi/kissaemoji-huutokauppa/)
 * [Linkki tuoteluokat sivulle](http://ensu.users.cs.helsinki.fi/kissaemoji-huutokauppa/tuoteluokat)
 * [Linkki tuoteluokan sivulle](http://ensu.users.cs.helsinki.fi/kissaemoji-huutokauppa/tuoteluokka/1)
-* [Linkki tuotteen sivulle](http://ensu.users.cs.helsinki.fi/kissaemoji-huutokauppa/tuote)
+* [Linkki tuotteen sivulle](http://ensu.users.cs.helsinki.fi/kissaemoji-huutokauppa/tuote/8)
 * [Linkki dokumentaatiooni](https://github.com/EnsioS/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
 ## Työn aihe
