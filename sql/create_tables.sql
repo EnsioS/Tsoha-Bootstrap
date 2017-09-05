@@ -38,6 +38,6 @@ CREATE TABLE Asiakastili(
     asiakastili_id SERIAL PRIMARY KEY,
     henkilotiedot INTEGER REFERENCES Henkilotiedot(henkilo_id) NOT NULL,
     kayttajatunnus varchar(20) NOT NULL,
-    salasana varchar(100) NOT NULL,
+    salasana varchar(300) NOT NULL,
     meklari boolean DEFAULT FALSE
 );

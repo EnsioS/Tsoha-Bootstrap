@@ -27,24 +27,25 @@ class User extends BaseModel {
             return null;
         }
     }
-
+    
     public static function authenticate($username, $password) {
         $query = DB::connection()->prepare('SELECT * FROM Asiakastili'
-                . ' WHERE kayttajatunnus = :username AND salasana = :password LIMIT 1');
-        $query->execute(array('username' => $username, 'password' => $password));
-        $row = $query->fetch();
+                . ' WHERE kayttajatunnus = :username');
+        $query->execute(array('username' => $username));
+        $rows = $query->fetchAll();
 
-        if ($row) {
-            return new User(array(
-                'id' => $row['asiakastili_id'],
-                'henkilotiedot' => $row['henkilotiedot'],
-                'username' => $row['kayttajatunnus'],
-                'password' => $row['salasana'],
-                'meklari' => $row['meklari']
-            ));
-        } else {
-            return null;
+        foreach ($rows as $row) {
+            if (password_verify($password, $row['salasana'])) {
+                return new User(array(
+                    'id' => $row['asiakastili_id'],
+                    'henkilotiedot' => $row['henkilotiedot'],
+                    'username' => $row['kayttajatunnus'],
+                    'password' => $row['salasana'],
+                    'meklari' => $row['meklari']
+                ));
+            }
         }
+        
+        return null;
     }
-
 }

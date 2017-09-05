@@ -49,11 +49,14 @@ VALUES ('TESTAAJATAR', 'testitys@testiposti.fi', 'Mannerhemintie 5b, Helsiki');
 
 -- Lisätään asiakastilit
 INSERT INTO Asiakastili (henkilotiedot, kayttajatunnus, salasana)
-VALUES (1, 'ensu', 'Salasana1');
+-- VALUES (1, 'ensu', 'Salasana1');
+VALUES (1, 'ensu', '$2y$10$stnuVODbAt5bt0qIURIFb.Z9zZL.YgkfIK8QiKQ1xNKe310SzqlJm');
 INSERT INTO Asiakastili (henkilotiedot, kayttajatunnus, salasana)
-VALUES (3, 'NAINEN', 'Salasana3');
+-- VALUES (3, 'NAINEN', 'Salasana3');
+VALUES (3, 'NAINEN', '$2y$10$vvXq7gi.fmA3V.kMsOVWAuL2wG0z29ScePgfdb4uPXcm8v8BhxC82');
 INSERT INTO Asiakastili (henkilotiedot, kayttajatunnus, salasana, Meklari)
-VALUES (2, 'MIES', 'Salasana2', TRUE);
+-- VALUES (2, 'MIES', 'Salasana2', TRUE);
+VALUES (2, 'MIES', '$2y$10$68YrlgIncw0plXBfwrxViukx0/OaUiPlCR5V7cawi6Yow2VayUX8G', TRUE);
 
 -- Lisätään Tarjouksia
 INSERT INTO Tarjous (tuote, henkilotiedot, summa) VALUES (2, 3, 112);
