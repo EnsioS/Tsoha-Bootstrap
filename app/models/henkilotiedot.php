@@ -28,7 +28,7 @@ class Henkilotiedot extends BaseModel {
         return null;
     }
 
-    public static function save() {
+    public function save() {
         $query = DB::connection()->prepare('INSERT INTO Henkilotiedot (nimi, sahkoposti, osoite)'
                 . ' VALUES (:nimi, :sahkoposti, :osoite) RETURNING henkilo_id');
         $query->execute(array('nimi' => $this->nimi, 'sahkoposti' => $this->sahkoposti, 'osoite' => $this->osoite));
@@ -42,11 +42,11 @@ class Henkilotiedot extends BaseModel {
     }
 
     public function validate_sahkoposti() {
-        return parent::validate_string_length('Sähköposti', $this->nimi, 5, 50);
+        return parent::validate_string_length('Sähköposti', $this->sahkoposti, 5, 50);
     }
 
     public function validate_osoite() {
-        return parent::validate_string_length('Kotiosoite', $this->nimi, 10, 150);
+        return parent::validate_string_length('Kotiosoite', $this->osoite, 10, 150);
     }
 
 }
